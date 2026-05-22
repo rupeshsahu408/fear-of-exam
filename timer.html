@@ -251,18 +251,21 @@
       width: 220px;
       height: 220px;
     }
-    .ring-bg   { fill: none; stroke: var(--surface2); stroke-width: 10; }
+    .ring-bg   { fill: none; stroke: rgba(255,255,255,0.22); stroke-width: 12; }
     .ring-fill {
       fill: none;
-      stroke: var(--ink);
-      stroke-width: 10;
+      stroke: #1a1a1a;
+      stroke-width: 12;
       stroke-linecap: round;
-      stroke-dasharray: 628;
+      stroke-dasharray: 628.318;
       stroke-dashoffset: 0;
-      transition: stroke-dashoffset 0.5s ease, stroke 0.3s;
+      transition: stroke-dashoffset 1s linear, stroke 0.3s;
     }
-    .ring-fill.break { stroke: var(--amber); }
-    .ring-fill.low   { stroke: var(--red); }
+    [data-theme="dark"] .ring-fill { stroke: #faf6f1; }
+    .ring-fill.break { stroke: #d97706; }
+    [data-theme="dark"] .ring-fill.break { stroke: #f59e0b; }
+    .ring-fill.low   { stroke: #dc2626; }
+    [data-theme="dark"] .ring-fill.low { stroke: #ef4444; }
 
     .timer-center {
       position: absolute;
@@ -593,10 +596,10 @@
   }
   applyTheme(localStorage.getItem('theme') === 'dark');
 
-  const CIRCUMFERENCE = 2 * Math.PI * 100;
+  const CIRCUMFERENCE = 2 * Math.PI * 100; // 628.318...
   const ringFill = document.getElementById('ringFill');
-  ringFill.style.strokeDasharray  = CIRCUMFERENCE;
-  ringFill.style.strokeDashoffset = 0;
+  ringFill.setAttribute('stroke-dasharray',  CIRCUMFERENCE);
+  ringFill.setAttribute('stroke-dashoffset', 0);
 
   let totalSeconds = 25 * 60, remaining = totalSeconds;
   let running = false, intervalId = null, sessionsDone = 0, isBreakMode = false;
@@ -658,7 +661,9 @@
     document.getElementById('timerDisplay').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
   }
   function updateRing() {
-    ringFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - remaining/totalSeconds);
+    const progress = totalSeconds > 0 ? remaining / totalSeconds : 0;
+    const offset   = CIRCUMFERENCE * (1 - progress);
+    ringFill.setAttribute('stroke-dashoffset', offset);
   }
   function onTimerEnd() {
     document.getElementById('startBtn').textContent = '▶ Start';
