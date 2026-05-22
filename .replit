@@ -33,3 +33,10 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[userenv]
+
+[userenv.shared]
+VAPID_PUBLIC_KEY = "BGro3sD4AzjdXHnQnsopskZaiSWoN6HA-NvzygEC6GrVVWtZJTbIHUWSXtUXZlnieiLRZtHnFYN8QOONbWdewHU"
+VAPID_PRIVATE_KEY = "wV2z-QiX0cp0by048MfmWfkTVqtXri1qUN5D5moXLi8"
+VAPID_EMAIL = "mailto:admin@meralakshya.app"
