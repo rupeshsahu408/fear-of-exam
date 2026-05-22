@@ -87,6 +87,17 @@
       align-items: center;
       position: relative;
     }
+    @keyframes divineGlow {
+      0%   { filter: drop-shadow(0 0 18px rgba(218,165,32,0.35)) drop-shadow(0 0 40px rgba(255,200,50,0.15)); opacity: 0.18; }
+      50%  { filter: drop-shadow(0 0 48px rgba(218,165,32,0.70)) drop-shadow(0 0 90px rgba(255,200,50,0.30)); opacity: 0.26; }
+      100% { filter: drop-shadow(0 0 18px rgba(218,165,32,0.35)) drop-shadow(0 0 40px rgba(255,200,50,0.15)); opacity: 0.18; }
+    }
+    @keyframes divineGlowDark {
+      0%   { filter: drop-shadow(0 0 18px rgba(218,165,32,0.25)) drop-shadow(0 0 40px rgba(255,200,50,0.10)); opacity: 0.10; }
+      50%  { filter: drop-shadow(0 0 48px rgba(218,165,32,0.50)) drop-shadow(0 0 90px rgba(255,200,50,0.22)); opacity: 0.16; }
+      100% { filter: drop-shadow(0 0 18px rgba(218,165,32,0.25)) drop-shadow(0 0 40px rgba(255,200,50,0.10)); opacity: 0.10; }
+    }
+
     body::before {
       content: '';
       position: fixed;
@@ -95,10 +106,10 @@
       opacity: 0.18;
       z-index: 0;
       pointer-events: none;
-      filter: drop-shadow(0 0 40px rgba(255,255,255,0.3));
+      animation: divineGlow 4s ease-in-out infinite;
     }
     [data-theme="dark"] body::before {
-      opacity: 0.10;
+      animation: divineGlowDark 4s ease-in-out infinite;
     }
 
     .container {
