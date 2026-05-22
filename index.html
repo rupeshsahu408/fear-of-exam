@@ -10,33 +10,45 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #faf6f1;
-      --surface:   #f0ebe3;
-      --surface2:  #e8e1d8;
-      --border:    #d4ccc3;
-      --border2:   #c4bbb0;
-      --ink:       #1a1a1a;
-      --ink-mid:   #4a4035;
-      --ink-soft:  #7a7068;
-      --ink-faint: #b0a89e;
-      --accent:    #c2410c;
-      --accent2:   #ea580c;
-      --amber:     #d97706;
+      --bg:         #faf6f1;
+      --surface:    #f0ebe3;
+      --surface2:   #e8e1d8;
+      --border:     #d4ccc3;
+      --border2:    #c4bbb0;
+      --ink:        #1a1a1a;
+      --ink-mid:    #4a4035;
+      --ink-soft:   #7a7068;
+      --ink-faint:  #b0a89e;
+      --accent:     #c2410c;
+      --accent2:    #ea580c;
+      --amber:      #d97706;
+      /* Strong-contrast card variables (always readable on both modes) */
+      --strong-bg:   #1a1a1a;
+      --strong-text: #faf6f1;
+      --strong-sub:  rgba(250,246,241,0.55);
+      --strong-icon: rgba(250,246,241,0.12);
+      --strong-check:rgba(250,246,241,0.25);
     }
 
     [data-theme="dark"] {
-      --bg:        #1a1a1a;
-      --surface:   #242424;
-      --surface2:  #2e2e2e;
-      --border:    #3d3d3d;
-      --border2:   #525252;
-      --ink:       #faf6f1;
-      --ink-mid:   #c8c0b8;
-      --ink-soft:  #9a9290;
-      --ink-faint: #585250;
-      --accent:    #e8622a;
-      --accent2:   #f97316;
-      --amber:     #f59e0b;
+      --bg:         #1a1a1a;
+      --surface:    #242424;
+      --surface2:   #2e2e2e;
+      --border:     #3d3d3d;
+      --border2:    #525252;
+      --ink:        #faf6f1;
+      --ink-mid:    #c8c0b8;
+      --ink-soft:   #9a9290;
+      --ink-faint:  #585250;
+      --accent:     #e8622a;
+      --accent2:    #f97316;
+      --amber:      #f59e0b;
+      /* Flip strong-contrast cards for dark mode */
+      --strong-bg:   #f0ebe3;
+      --strong-text: #1a1a1a;
+      --strong-sub:  rgba(26,26,26,0.55);
+      --strong-icon: rgba(26,26,26,0.1);
+      --strong-check:rgba(26,26,26,0.2);
     }
 
     html { transition: background 0.25s, color 0.25s; }
@@ -84,8 +96,8 @@
     /* ── Badge ─────────────────────────────── */
     .badge {
       display: inline-block;
-      background: var(--ink);
-      color: var(--bg);
+      background: var(--strong-bg);
+      color: var(--strong-text);
       border-radius: 50px;
       padding: 5px 18px;
       font-size: 0.7rem;
@@ -118,7 +130,7 @@
       display: inline-flex;
       flex-direction: column;
       align-items: center;
-      background: var(--ink);
+      background: var(--strong-bg);
       border-radius: 20px;
       padding: 22px 52px;
       margin-bottom: 28px;
@@ -127,19 +139,20 @@
       font-size: clamp(3.5rem, 9vw, 5.5rem);
       font-weight: 900;
       line-height: 1;
-      color: #ffffff;
+      color: var(--strong-text);
       font-variant-numeric: tabular-nums;
       letter-spacing: -2px;
     }
     .total-days-label {
       font-size: 1.1rem;
       font-weight: 800;
-      color: rgba(255,255,255,0.85);
+      color: var(--strong-text);
+      opacity: 0.85;
       margin-top: 4px;
     }
     .total-days-sub {
       font-size: 0.65rem;
-      color: rgba(255,255,255,0.4);
+      color: var(--strong-sub);
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-top: 6px;
@@ -211,7 +224,7 @@
     .progress-bar-fill {
       height: 100%;
       border-radius: 50px;
-      background: var(--ink);
+      background: var(--strong-bg);
       transition: width 1s ease;
     }
 
@@ -276,7 +289,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: var(--ink);
+      background: var(--strong-bg);
       border-radius: 50px;
       padding: 8px 18px;
       flex-shrink: 0;
@@ -285,12 +298,12 @@
     .streak-count {
       font-size: 1.3rem;
       font-weight: 900;
-      color: #fff;
+      color: var(--strong-text);
       line-height: 1;
     }
     .streak-label {
       font-size: 0.6rem;
-      color: rgba(255,255,255,0.55);
+      color: var(--strong-sub);
       font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -316,7 +329,7 @@
       transition: border-color 0.15s, background 0.15s;
     }
     .subject-row:hover { border-color: var(--border2); background: var(--surface2); }
-    .subject-row.done { background: var(--ink); border-color: var(--ink); }
+    .subject-row.done { background: var(--strong-bg); border-color: var(--strong-bg); }
 
     .subject-info { display: flex; align-items: center; gap: 12px; }
     .subject-icon {
@@ -328,21 +341,21 @@
       font-size: 1rem;
       flex-shrink: 0;
     }
-    .subject-row.done .subject-icon { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+    .subject-row.done .subject-icon { background: var(--strong-icon); border-color: var(--strong-check); }
 
     .subject-name {
       font-size: 0.88rem;
       font-weight: 800;
       color: var(--ink);
     }
-    .subject-row.done .subject-name { color: #fff; }
+    .subject-row.done .subject-name { color: var(--strong-text); }
     .subject-tag {
       font-size: 0.65rem;
       color: var(--ink-faint);
       font-weight: 700;
       margin-top: 1px;
     }
-    .subject-row.done .subject-tag { color: rgba(255,255,255,0.5); }
+    .subject-row.done .subject-tag { color: var(--strong-sub); }
 
     .subject-check {
       width: 22px; height: 22px;
@@ -352,7 +365,7 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .subject-row.done .subject-check { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); }
+    .subject-row.done .subject-check { background: var(--strong-check); border-color: var(--strong-check); }
     .subject-check svg { opacity: 0; }
     .subject-row.done .subject-check svg { opacity: 1; }
 
@@ -381,7 +394,7 @@
     }
     .tracker-mini-bar-fill {
       height: 100%;
-      background: var(--ink);
+      background: var(--strong-bg);
       border-radius: 50px;
       transition: width 0.3s ease;
     }
@@ -399,11 +412,11 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      background: var(--ink);
+      background: var(--strong-bg);
       border-radius: 16px;
       padding: 16px 12px;
       text-decoration: none;
-      color: #fff;
+      color: var(--strong-text);
       transition: opacity 0.15s;
     }
     .timer-fab a:hover { opacity: 0.85; }
