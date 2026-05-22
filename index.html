@@ -187,29 +187,34 @@
       display: inline-flex;
       flex-direction: column;
       align-items: center;
-      background: var(--strong-bg);
+      background: rgba(250,246,241,0.18);
+      border: 1.5px solid rgba(255,255,255,0.45);
       border-radius: 20px;
       padding: 22px 52px;
       margin-bottom: 28px;
+    }
+    [data-theme="dark"] .total-days-banner {
+      background: rgba(20,20,20,0.22);
+      border-color: rgba(255,255,255,0.12);
     }
     .total-days-num {
       font-size: clamp(3.5rem, 9vw, 5.5rem);
       font-weight: 900;
       line-height: 1;
-      color: var(--strong-text);
+      color: var(--ink);
       font-variant-numeric: tabular-nums;
       letter-spacing: -2px;
     }
     .total-days-label {
       font-size: 1.1rem;
       font-weight: 800;
-      color: var(--strong-text);
+      color: var(--ink);
       opacity: 0.85;
       margin-top: 4px;
     }
     .total-days-sub {
       font-size: 0.65rem;
-      color: var(--strong-sub);
+      color: var(--ink-soft);
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-top: 6px;
