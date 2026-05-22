@@ -505,6 +505,57 @@
       .total-days-banner { padding: 18px 30px; }
     }
 
+    /* ── Daily Shloka card ───────────────────── */
+    .shloka-card {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(218,165,32,0.08) 0%, rgba(255,200,50,0.04) 100%);
+      border: 1.5px solid rgba(218,165,32,0.35);
+      border-radius: 18px;
+      padding: 22px 24px 20px;
+      margin-bottom: 20px;
+      position: relative;
+      text-align: center;
+    }
+    .shloka-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 900;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #b8860b;
+      background: rgba(218,165,32,0.12);
+      border: 1px solid rgba(218,165,32,0.30);
+      border-radius: 50px;
+      padding: 4px 12px;
+      margin-bottom: 14px;
+    }
+    .shloka-sanskrit {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .shloka-divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(218,165,32,0.6), transparent);
+      margin: 0 auto 10px;
+      border-radius: 2px;
+    }
+    .shloka-meaning {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+      line-height: 1.75;
+    }
+    [data-theme="dark"] .shloka-card {
+      background: linear-gradient(135deg, rgba(218,165,32,0.06) 0%, rgba(255,200,50,0.03) 100%);
+      border-color: rgba(218,165,32,0.25);
+    }
+    [data-theme="dark"] .shloka-badge { color: #f5c842; }
+
     @keyframes shimmerText {
       0%   { background-position: -200% center; }
       100% { background-position: 200% center; }
@@ -596,6 +647,13 @@
     <div class="progress-bar-bg">
       <div class="progress-bar-fill" id="bar" style="width:0%"></div>
     </div>
+  </div>
+
+  <div class="shloka-card">
+    <div class="shloka-badge">🪷 आज का श्लोक — Daily Shloka</div>
+    <div class="shloka-sanskrit" id="shloka-sanskrit"></div>
+    <div class="shloka-divider"></div>
+    <div class="shloka-meaning" id="shloka-meaning"></div>
   </div>
 
   <div class="quote-card">
@@ -719,6 +777,70 @@
     applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
   }
   applyTheme(localStorage.getItem('theme') === 'dark');
+
+  // ── Daily Shloka ──────────────────────────────────────────────
+  const shlokas = [
+    {
+      sanskrit: "सरस्वति नमस्तुभ्यं वरदे कामरूपिणि।\nविद्यारम्भं करिष्यामि सिद्धिर्भवतु मे सदा॥",
+      meaning: "हे माँ सरस्वती, मैं तुम्हें नमन करता हूँ। हे वरदायिनी! मैं विद्या आरम्भ करता हूँ — मुझे सदा सिद्धि प्राप्त हो।"
+    },
+    {
+      sanskrit: "या कुन्देन्दुतुषारहारधवला या शुभ्रवस्त्रावृता।\nया वीणावरदण्डमण्डितकरा या श्वेतपद्मासना॥",
+      meaning: "जो कुन्द के फूल, चंद्रमा और बर्फ के हार जैसी श्वेत हैं, जो श्वेत वस्त्र धारण करती हैं, जिनके हाथ में वीणा है — उन माँ सरस्वती को प्रणाम।"
+    },
+    {
+      sanskrit: "उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः।\nन हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः॥",
+      meaning: "परिश्रम से ही कार्य सिद्ध होते हैं, केवल इच्छाओं से नहीं। सोते हुए शेर के मुँह में हिरण स्वयं नहीं आता।"
+    },
+    {
+      sanskrit: "विद्या ददाति विनयं विनयाद् याति पात्रताम्।\nपात्रत्वाद् धनमाप्नोति धनाद् धर्मं ततः सुखम्॥",
+      meaning: "विद्या से विनम्रता आती है, विनम्रता से योग्यता, योग्यता से धन, धन से धर्म और धर्म से सच्चा सुख मिलता है।"
+    },
+    {
+      sanskrit: "क्षणशः कणशश्चैव विद्यामर्थं च साधयेत्।\nक्षणत्यागे कुतो विद्या कणत्यागे कुतो धनम्॥",
+      meaning: "एक-एक क्षण से विद्या और एक-एक कण से धन प्राप्त करना चाहिए। जो समय गँवाता है उसे विद्या कहाँ, और जो बचत नहीं करता उसे धन कहाँ।"
+    },
+    {
+      sanskrit: "अष्टादश पुराणेषु व्यासस्य वचनद्वयम्।\nपरोपकारः पुण्याय पापाय परपीडनम्॥",
+      meaning: "दूसरों की सहायता करना पुण्य है और दूसरों को कष्ट देना पाप — यही सारे शास्त्रों का सार है। पढ़कर दूसरों का जीवन बेहतर बनाओ।"
+    },
+    {
+      sanskrit: "काकचेष्टा बकोध्यानं श्वाननिद्रा तथैव च।\nअल्पाहारी गृहत्यागी विद्यार्थी पञ्चलक्षणम्॥",
+      meaning: "कौए जैसी सतर्कता, बगुले जैसा ध्यान, कुत्ते जैसी नींद (हल्की), कम भोजन, और एकाग्रता — ये पाँच गुण एक विद्यार्थी के होने चाहिए।"
+    },
+    {
+      sanskrit: "न चोरहार्यं न च राजहार्यं न भ्रातृभाज्यं न च भारकारि।\nव्यये कृते वर्धत एव नित्यं विद्याधनं सर्वधनप्रधानम्॥",
+      meaning: "विद्या को न चोर चुरा सकता है, न राजा छीन सकता है, न भाई बाँट सकता है, यह बोझ भी नहीं। खर्च करने पर और बढ़ती है — विद्या सबसे बड़ा धन है।"
+    },
+    {
+      sanskrit: "उत्तिष्ठत जाग्रत प्राप्य वरान् निबोधत।\nक्षुरस्य धारा निशिता दुरत्यया दुर्गं पथस्तत् कवयो वदन्ति॥",
+      meaning: "उठो, जागो और श्रेष्ठ गुरुओं से ज्ञान प्राप्त करो। विद्वान कहते हैं — यह मार्ग उस्तरे की धार जैसा कठिन है, पर पार करना ही है।"
+    },
+    {
+      sanskrit: "आलस्यं हि मनुष्याणां शरीरस्थो महान् रिपुः।\nनास्त्युद्यमसमो बन्धुः कृत्वा यं नावसीदति॥",
+      meaning: "आलस्य मनुष्य का सबसे बड़ा शत्रु है जो शरीर में ही रहता है। परिश्रम जैसा कोई मित्र नहीं — जो मेहनत करता है वह कभी दुखी नहीं होता।"
+    },
+    {
+      sanskrit: "सुखार्थिनः कुतो विद्या नास्ति विद्यार्थिनः सुखम्।\nसुखार्थी वा त्यजेद् विद्यां विद्यार्थी वा त्यजेत् सुखम्॥",
+      meaning: "जो सुख चाहता है उसे विद्या कहाँ, और जो विद्या चाहता है उसे सुख कहाँ। सुख चाहो तो पढ़ाई छोड़ो, या पढ़ाई चाहो तो आराम छोड़ो।"
+    },
+    {
+      sanskrit: "गुरुर्ब्रह्मा गुरुर्विष्णुः गुरुर्देवो महेश्वरः।\nगुरुः साक्षात् परं ब्रह्म तस्मै श्रीगुरवे नमः॥",
+      meaning: "गुरु ही ब्रह्मा हैं, गुरु ही विष्णु हैं, गुरु ही महेश्वर हैं। गुरु साक्षात् परमब्रह्म हैं — उन्हें मेरा नमन।"
+    },
+    {
+      sanskrit: "विद्वत्त्वं च नृपत्वं च नैव तुल्यं कदाचन।\nस्वदेशे पूज्यते राजा विद्वान् सर्वत्र पूज्यते॥",
+      meaning: "विद्वान और राजा में कभी तुलना नहीं हो सकती। राजा केवल अपने देश में पूजा जाता है, पर विद्वान सर्वत्र पूजनीय होता है।"
+    },
+    {
+      sanskrit: "येषां न विद्या न तपो न दानं ज्ञानं न शीलं न गुणो न धर्मः।\nते मर्त्यलोके भुवि भारभूता मनुष्यरूपेण मृगाश्चरन्ति॥",
+      meaning: "जिनके पास न विद्या है, न तप, न दान, न ज्ञान, न शील — वे इस धरती पर बोझ हैं। मनुष्य रूप में वे पशु के समान हैं।"
+    },
+  ];
+  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  const todayShloka = shlokas[dayOfYear % shlokas.length];
+  document.getElementById('shloka-sanskrit').textContent = todayShloka.sanskrit;
+  document.getElementById('shloka-meaning').textContent  = todayShloka.meaning;
 
   // ── Quotes ────────────────────────────────────────────────────
   const quotes = [
