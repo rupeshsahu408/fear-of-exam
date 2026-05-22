@@ -4,14 +4,17 @@ const path = require('path');
 
 const PORT = 5000;
 const MIME = {
-  '.html': 'text/html; charset=utf-8',
-  '.css':  'text/css',
-  '.js':   'application/javascript',
-  '.ico':  'image/x-icon',
-  '.jpg':  'image/jpeg',
-  '.jpeg': 'image/jpeg',
-  '.png':  'image/png',
-  '.webp': 'image/webp',
+  '.html':        'text/html; charset=utf-8',
+  '.css':         'text/css',
+  '.js':          'application/javascript',
+  '.json':        'application/json',
+  '.webmanifest': 'application/manifest+json',
+  '.svg':         'image/svg+xml',
+  '.ico':         'image/x-icon',
+  '.jpg':         'image/jpeg',
+  '.jpeg':        'image/jpeg',
+  '.png':         'image/png',
+  '.webp':        'image/webp',
 };
 
 const server = http.createServer((req, res) => {
