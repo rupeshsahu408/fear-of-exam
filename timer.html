@@ -437,21 +437,26 @@
     .saraswati-figure {
       position: fixed;
       bottom: 0;
-      width: 210px;
+      width: 220px;
       z-index: 10;
       pointer-events: none;
       animation: saraGlow 4s ease-in-out infinite;
+      border-radius: 12px;
+      overflow: hidden;
     }
-    .saraswati-left  { left: 0; }
-    .saraswati-right { right: 0; }
-    .saraswati-right img { transform: scaleX(-1); }
+    .saraswati-left  { left: 0; border-radius: 0 12px 0 0; }
+    .saraswati-right { right: 0; border-radius: 12px 0 0 0; }
     .saraswati-figure img {
       width: 100%;
       height: auto;
       display: block;
+      opacity: 0.92;
+    }
+    @media (max-width: 1100px) {
+      .saraswati-figure { width: 160px; }
     }
     @media (max-width: 900px) {
-      .saraswati-figure { width: 130px; }
+      .saraswati-figure { width: 120px; }
     }
     @media (max-width: 600px) {
       .saraswati-figure { width: 80px; }
@@ -487,10 +492,10 @@
 <body>
 
   <div class="saraswati-figure saraswati-left">
-    <img src="/public/saraswati3_transparent.png" alt="Maa Saraswati"/>
+    <img src="/public/saraswati_final.png" alt="Maa Saraswati"/>
   </div>
   <div class="saraswati-figure saraswati-right">
-    <img src="/public/saraswati3_transparent.png" alt="Maa Saraswati"/>
+    <img src="/public/saraswati_final.png" alt="Maa Saraswati"/>
   </div>
   <div class="jai-saraswati">🪷 जय माँ सरस्वती 🪷</div>
 
