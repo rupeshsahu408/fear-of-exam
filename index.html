@@ -59,8 +59,8 @@
       top: 20px;
       right: 20px;
       z-index: 100;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.20);
+      border: 1.5px solid rgba(255,255,255,0.45);
       border-radius: 50px;
       padding: 8px 16px;
       cursor: pointer;
@@ -74,12 +74,16 @@
       text-transform: uppercase;
       transition: border-color 0.15s, color 0.15s;
     }
-    .theme-toggle:hover { border-color: var(--border2); color: var(--ink); }
+    [data-theme="dark"] .theme-toggle {
+      background: rgba(0,0,0,0.22);
+      border-color: rgba(255,255,255,0.14);
+    }
+    .theme-toggle:hover { border-color: rgba(218,165,32,0.6); color: var(--ink); }
 
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      background: var(--bg);
+      background: transparent;
       color: var(--ink);
       padding: 40px 16px 60px;
       display: flex;
@@ -88,30 +92,27 @@
       position: relative;
     }
     @keyframes divineGlow {
-      0%   { filter: drop-shadow(0 0 24px rgba(218,165,32,0.40)) drop-shadow(0 0 60px rgba(255,200,50,0.18)) brightness(1.08) contrast(0.92); opacity: 0.30; }
-      50%  { filter: drop-shadow(0 0 60px rgba(218,165,32,0.75)) drop-shadow(0 0 120px rgba(255,200,50,0.32)) brightness(1.18) contrast(0.88); opacity: 0.42; }
-      100% { filter: drop-shadow(0 0 24px rgba(218,165,32,0.40)) drop-shadow(0 0 60px rgba(255,200,50,0.18)) brightness(1.08) contrast(0.92); opacity: 0.30; }
+      0%   { filter: brightness(1.04) saturate(1.05); }
+      50%  { filter: brightness(1.08) saturate(1.10); }
+      100% { filter: brightness(1.04) saturate(1.05); }
     }
     @keyframes divineGlowDark {
-      0%   { filter: drop-shadow(0 0 24px rgba(218,165,32,0.30)) drop-shadow(0 0 60px rgba(255,200,50,0.12)) brightness(1.06) contrast(0.94); opacity: 0.18; }
-      50%  { filter: drop-shadow(0 0 60px rgba(218,165,32,0.58)) drop-shadow(0 0 120px rgba(255,200,50,0.24)) brightness(1.14) contrast(0.90); opacity: 0.28; }
-      100% { filter: drop-shadow(0 0 24px rgba(218,165,32,0.30)) drop-shadow(0 0 60px rgba(255,200,50,0.12)) brightness(1.06) contrast(0.94); opacity: 0.18; }
+      0%   { filter: brightness(0.90) saturate(0.95); }
+      50%  { filter: brightness(0.96) saturate(1.00); }
+      100% { filter: brightness(0.90) saturate(0.95); }
     }
 
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: url('/public/saraswati_final.png') center center / auto 95% no-repeat;
-      opacity: 0.30;
+      background: url('/public/saraswati_landscape.png') center 30% / cover no-repeat;
       z-index: 0;
       pointer-events: none;
-      mix-blend-mode: luminosity;
-      animation: divineGlow 4s ease-in-out infinite;
+      animation: divineGlow 5s ease-in-out infinite;
     }
     [data-theme="dark"] body::before {
-      mix-blend-mode: screen;
-      animation: divineGlowDark 4s ease-in-out infinite;
+      animation: divineGlowDark 5s ease-in-out infinite;
     }
 
     .container {
@@ -224,13 +225,17 @@
       margin-bottom: 28px;
     }
     .unit {
-      background: var(--surface);
-      border: 1.5px solid var(--border);
+      background: rgba(250,246,241,0.18);
+      border: 1.5px solid rgba(255,255,255,0.45);
       border-radius: 16px;
       padding: 24px 20px 16px;
       min-width: 130px;
       flex: 1 1 110px;
       max-width: 180px;
+    }
+    [data-theme="dark"] .unit {
+      background: rgba(20,20,20,0.22);
+      border-color: rgba(255,255,255,0.12);
     }
     .unit-value {
       font-size: clamp(2.4rem, 6vw, 3.8rem);
@@ -272,11 +277,15 @@
       font-weight: 700;
     }
     .progress-bar-bg {
-      background: var(--surface2);
+      background: rgba(255,255,255,0.20);
       border-radius: 50px;
       height: 8px;
       overflow: hidden;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    [data-theme="dark"] .progress-bar-bg {
+      background: rgba(0,0,0,0.20);
+      border-color: rgba(255,255,255,0.10);
     }
     .progress-bar-fill {
       height: 100%;
@@ -287,13 +296,18 @@
 
     /* ── Quote ─────────────────────────────── */
     .quote-card {
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-left: 4px solid var(--ink);
+      background: rgba(250,246,241,0.18);
+      border: 1.5px solid rgba(255,255,255,0.45);
+      border-left: 4px solid rgba(26,26,26,0.6);
       border-radius: 14px;
       padding: 20px 24px;
       margin-bottom: 24px;
       text-align: left;
+    }
+    [data-theme="dark"] .quote-card {
+      background: rgba(20,20,20,0.22);
+      border-color: rgba(255,255,255,0.12);
+      border-left-color: rgba(250,246,241,0.5);
     }
     .quote-text {
       font-size: clamp(0.9rem, 2.2vw, 1.05rem);
@@ -315,12 +329,16 @@
 
     /* ── Study Tracker ─────────────────────── */
     .tracker {
-      background: var(--surface);
-      border: 1.5px solid var(--border);
+      background: rgba(250,246,241,0.18);
+      border: 1.5px solid rgba(255,255,255,0.45);
       border-radius: 16px;
       padding: 22px 24px;
       margin-bottom: 24px;
       text-align: left;
+    }
+    [data-theme="dark"] .tracker {
+      background: rgba(20,20,20,0.22);
+      border-color: rgba(255,255,255,0.12);
     }
     .tracker-header {
       display: flex;
@@ -377,15 +395,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--bg);
-      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.40);
       border-radius: 10px;
       padding: 12px 16px;
       cursor: pointer;
       user-select: none;
       transition: border-color 0.15s, background 0.15s;
     }
-    .subject-row:hover { border-color: var(--border2); background: var(--surface2); }
+    [data-theme="dark"] .subject-row {
+      background: rgba(0,0,0,0.15);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .subject-row:hover { border-color: rgba(218,165,32,0.55); background: rgba(255,255,255,0.25); }
+    [data-theme="dark"] .subject-row:hover { background: rgba(0,0,0,0.25); }
     .subject-row.done { background: var(--strong-bg); border-color: var(--strong-bg); }
 
     .subject-info { display: flex; align-items: center; gap: 12px; }
@@ -508,13 +531,17 @@
     /* ── Daily Shloka card ───────────────────── */
     .shloka-card {
       width: 100%;
-      background: linear-gradient(135deg, rgba(218,165,32,0.08) 0%, rgba(255,200,50,0.04) 100%);
-      border: 1.5px solid rgba(218,165,32,0.35);
+      background: rgba(255,248,220,0.20);
+      border: 1.5px solid rgba(218,165,32,0.45);
       border-radius: 18px;
       padding: 22px 24px 20px;
       margin-bottom: 20px;
       position: relative;
       text-align: center;
+    }
+    [data-theme="dark"] .shloka-card {
+      background: rgba(20,15,5,0.22);
+      border-color: rgba(218,165,32,0.30);
     }
     .shloka-badge {
       display: inline-block;
