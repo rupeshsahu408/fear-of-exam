@@ -85,12 +85,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url('/public/saraswati.jpg') center 15% / cover no-repeat;
+      opacity: 0.07;
+      z-index: 0;
+      pointer-events: none;
+    }
+    [data-theme="dark"] body::before {
+      opacity: 0.04;
     }
 
     .container {
       width: 100%;
       max-width: 820px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     /* ── Badge ─────────────────────────────── */
@@ -105,6 +120,33 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 22px;
+    }
+
+    /* ── Student nameplate ─────────────────── */
+    .student-nameplate {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .nameplate-hi {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink-soft);
+    }
+    .nameplate-name {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -1px;
+      line-height: 1;
+      font-style: italic;
+    }
+    .nameplate-mark {
+      font-size: 1rem;
+      color: var(--border2);
     }
 
     /* ── Heading ───────────────────────────── */
@@ -170,27 +212,28 @@
     .unit {
       background: var(--surface);
       border: 1.5px solid var(--border);
-      border-radius: 14px;
-      padding: 18px 14px 12px;
-      min-width: 106px;
-      flex: 1 1 88px;
-      max-width: 128px;
+      border-radius: 16px;
+      padding: 24px 20px 16px;
+      min-width: 130px;
+      flex: 1 1 110px;
+      max-width: 180px;
     }
     .unit-value {
-      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
       font-weight: 900;
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: var(--ink);
       font-variant-numeric: tabular-nums;
-      letter-spacing: -1px;
+      letter-spacing: -2px;
     }
     .unit-label {
-      font-size: 0.62rem;
-      letter-spacing: 2px;
+      font-size: 0.6rem;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: var(--ink-faint);
       font-weight: 800;
+      line-height: 1.5;
     }
     .sep {
       display: flex;
@@ -468,6 +511,12 @@
 
   <div class="badge">Bihar Board 2027 &nbsp;·&nbsp; Class XII PCM</div>
 
+  <div class="student-nameplate">
+    <span class="nameplate-hi">नमस्ते,</span>
+    <span class="nameplate-name">Rupesh</span>
+    <span class="nameplate-mark">✦</span>
+  </div>
+
   <h1>हर पल कीमती है।<br><span>तेरा लक्ष्य बड़ा है।</span></h1>
   <p class="subtitle">परीक्षा शुरू होने में बचा है सिर्फ —</p>
 
@@ -479,33 +528,18 @@
 
   <div class="countdown">
     <div class="unit">
-      <div class="unit-value" id="years">00</div>
-      <div class="unit-label">Years</div>
-    </div>
-    <div class="sep">:</div>
-    <div class="unit">
-      <div class="unit-value" id="months">00</div>
-      <div class="unit-label">Months</div>
-    </div>
-    <div class="sep">:</div>
-    <div class="unit">
-      <div class="unit-value" id="days">00</div>
-      <div class="unit-label">Days</div>
-    </div>
-    <div class="sep">:</div>
-    <div class="unit">
       <div class="unit-value" id="hours">00</div>
-      <div class="unit-label">Hours</div>
+      <div class="unit-label">घंटे / Hours</div>
     </div>
     <div class="sep">:</div>
     <div class="unit">
       <div class="unit-value" id="minutes">00</div>
-      <div class="unit-label">Minutes</div>
+      <div class="unit-label">मिनट / Minutes</div>
     </div>
     <div class="sep">:</div>
     <div class="unit">
       <div class="unit-value" id="seconds">00</div>
-      <div class="unit-label">Seconds</div>
+      <div class="unit-label">सेकंड / Seconds</div>
     </div>
   </div>
 
@@ -675,25 +709,16 @@
     const now  = new Date();
     const diff = EXAM_DATE - now;
     if (diff <= 0) {
-      ['years','months','days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
+      ['hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
       document.getElementById('totalDays').textContent = '0';
       document.getElementById('bar').style.width = '100%';
       document.getElementById('pct').textContent = '100%';
       return;
     }
-    const examD = new Date(EXAM_DATE), nowD = new Date(now);
-    let yrs = examD.getFullYear() - nowD.getFullYear();
-    let mons = examD.getMonth() - nowD.getMonth();
-    let dys = examD.getDate() - nowD.getDate();
-    if (dys < 0) { mons--; dys += new Date(examD.getFullYear(), examD.getMonth(), 0).getDate(); }
-    if (mons < 0) { yrs--; mons += 12; }
     const remMs = diff % (1000*60*60*24);
-    const hrs = Math.floor(remMs/(1000*60*60));
+    const hrs  = Math.floor(remMs/(1000*60*60));
     const mins = Math.floor((remMs%(1000*60*60))/(1000*60));
     const secs = Math.floor((remMs%(1000*60))/1000);
-    document.getElementById('years').textContent   = pad(yrs);
-    document.getElementById('months').textContent  = pad(mons);
-    document.getElementById('days').textContent    = pad(dys);
     document.getElementById('hours').textContent   = pad(hrs);
     document.getElementById('minutes').textContent = pad(mins);
     document.getElementById('seconds').textContent = pad(secs);

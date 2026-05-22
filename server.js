@@ -8,6 +8,10 @@ const MIME = {
   '.css':  'text/css',
   '.js':   'application/javascript',
   '.ico':  'image/x-icon',
+  '.jpg':  'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.png':  'image/png',
+  '.webp': 'image/webp',
 };
 
 const server = http.createServer((req, res) => {
