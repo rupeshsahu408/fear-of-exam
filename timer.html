@@ -143,21 +143,19 @@
     .card {
       width: 100%;
       max-width: 680px;
-      background: rgba(250, 246, 241, 0.22);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      background: rgba(250, 246, 241, 0.15);
+      border: 1.5px solid rgba(255, 255, 255, 0.50);
       border-radius: 24px;
       padding: 28px 28px 32px;
       margin-bottom: 20px;
       position: relative;
       z-index: 1;
-      box-shadow: 0 8px 48px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.6);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
     }
     [data-theme="dark"] .card {
-      background: rgba(26, 26, 26, 0.28);
-      border-color: rgba(255,255,255,0.12);
-      box-shadow: 0 8px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+      background: rgba(20, 20, 20, 0.22);
+      border-color: rgba(255,255,255,0.14);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.06);
     }
 
     /* ── Mode tabs ───────────────────────────── */
@@ -165,15 +163,13 @@
       display: flex;
       gap: 6px;
       margin-bottom: 28px;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.40);
       border-radius: 12px;
       padding: 5px;
     }
     [data-theme="dark"] .mode-tabs {
-      background: rgba(0,0,0,0.20);
+      background: rgba(0,0,0,0.18);
       border-color: rgba(255,255,255,0.10);
     }
     .mode-tab {
@@ -216,10 +212,8 @@
     .field select,
     .field input {
       width: 100%;
-      background: rgba(255,255,255,0.25);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1.5px solid rgba(255,255,255,0.40);
+      background: rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(255,255,255,0.45);
       border-radius: 10px;
       padding: 11px 14px;
       color: var(--ink);
@@ -232,13 +226,11 @@
     }
     [data-theme="dark"] .field select,
     [data-theme="dark"] .field input {
-      background: rgba(0,0,0,0.25);
-      border-color: rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+      border-color: rgba(255,255,255,0.14);
     }
     .field select:focus,
-    .field input:focus { border-color: rgba(218,165,32,0.6); background: rgba(255,255,255,0.35); }
-    [data-theme="dark"] .field select:focus,
-    [data-theme="dark"] .field input:focus { background: rgba(0,0,0,0.35); }
+    .field input:focus { border-color: rgba(218,165,32,0.7); }
     .field input::placeholder { color: var(--ink-faint); font-weight: 600; }
 
     /* ── Timer ring ──────────────────────────── */
@@ -454,10 +446,8 @@
     .tips-card {
       width: 100%;
       max-width: 680px;
-      background: rgba(250, 246, 241, 0.22);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(255,255,255,0.40);
+      background: rgba(250, 246, 241, 0.15);
+      border: 1.5px solid rgba(255,255,255,0.45);
       position: relative;
       z-index: 1;
       border-left: 4px solid rgba(218,165,32,0.7);
@@ -465,7 +455,7 @@
       padding: 16px 20px;
     }
     [data-theme="dark"] .tips-card {
-      background: rgba(26,26,26,0.28);
+      background: rgba(20,20,20,0.20);
       border-color: rgba(255,255,255,0.10);
       border-left-color: rgba(218,165,32,0.5);
     }
