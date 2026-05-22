@@ -400,6 +400,35 @@
     }
 
     /* ── Saraswati figure ─────────────────────── */
+    @keyframes shimmerText {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes fadeUpDown {
+      0%, 100% { opacity: 0.7; transform: translateY(0); }
+      50%       { opacity: 1;   transform: translateY(-4px); }
+    }
+    .jai-saraswati {
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 11;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #b8860b 0%, #ffd700 30%, #fffacd 50%, #ffd700 70%, #b8860b 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerText 2.5s linear infinite, fadeUpDown 4s ease-in-out infinite;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
     @keyframes saraGlow {
       0%   { filter: drop-shadow(0 0 18px rgba(218,165,32,0.45)) drop-shadow(0 0 50px rgba(255,200,50,0.18)) brightness(1.06); opacity: 0.82; }
       50%  { filter: drop-shadow(0 0 52px rgba(218,165,32,0.85)) drop-shadow(0 0 110px rgba(255,200,50,0.35)) brightness(1.15); opacity: 1; }
@@ -463,6 +492,7 @@
   <div class="saraswati-figure saraswati-right">
     <img src="/public/saraswati_transparent.png" alt="Maa Saraswati"/>
   </div>
+  <div class="jai-saraswati">🪷 जय माँ सरस्वती 🪷</div>
 
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
     <span id="themeIcon">🌙</span>
