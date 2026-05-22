@@ -175,7 +175,7 @@
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     .scroll-area {
       margin-top: 108px;
-      padding: 0 20px 100px;
+      padding: 0 20px 120px;
       max-width: 680px;
       width: 100%;
       margin-left: auto;
@@ -505,133 +505,252 @@
     .empty-sub   { font-size: 0.8rem; color: var(--ink-soft); line-height: 1.55; }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       ADD TASK BAR  (fixed bottom)
+       FLOATING ACTION BUTTON
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-    .add-bar {
+    .fab {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      padding: 10px 20px 16px;
-      z-index: 100;
-    }
-    .add-main-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .add-input {
-      flex: 1;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: 11px;
-      padding: 11px 14px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      color: var(--ink);
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    .add-input::placeholder { color: var(--ink-faint); }
-    .add-input:focus { border-color: var(--accent); }
-    .add-submit {
-      width: 42px; height: 42px;
-      border-radius: 11px;
+      bottom: 28px;
+      right: 24px;
+      width: 56px; height: 56px;
+      border-radius: 18px;
       background: var(--accent);
       border: none;
       color: #fff;
-      font-size: 1.25rem;
+      font-size: 1.65rem;
+      font-weight: 300;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.14s, transform 0.1s;
+      z-index: 200;
+      box-shadow: 0 4px 20px rgba(194,65,12,0.38), 0 1px 4px rgba(0,0,0,0.12);
+      transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), background 0.15s, box-shadow 0.15s;
     }
-    .add-submit:hover  { background: #a83509; }
-    .add-submit:active { transform: scale(0.94); }
+    .fab:hover  { background: #a83509; box-shadow: 0 6px 28px rgba(194,65,12,0.48); }
+    .fab:active { transform: scale(0.91); }
+    .fab.open   { transform: rotate(45deg); background: #666; box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
 
-    /* Options row (shows when input focused or has text) */
-    .add-opts {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       MODAL OVERLAY + SHEET
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      z-index: 300;
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+    .modal-overlay.open {
+      background: rgba(0,0,0,0.42);
+      pointer-events: all;
+    }
+    [data-theme="dark"] .modal-overlay.open { background: rgba(0,0,0,0.62); }
+
+    .modal-sheet {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--bg);
+      border-radius: 22px 22px 0 0;
+      z-index: 310;
+      padding: 0 20px 32px;
+      transform: translateY(100%);
+      transition: transform 0.38s cubic-bezier(0.32,0.72,0,1);
+      max-height: 90vh;
+      overflow-y: auto;
       scrollbar-width: none;
-      align-items: center;
-      padding-top: 8px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease, padding-top 0.2s ease;
+      max-width: 680px;
+      margin: 0 auto;
     }
-    .add-opts.open {
-      max-height: 48px;
-      overflow: visible;
-      overflow-x: auto;
+    .modal-sheet::-webkit-scrollbar { display: none; }
+    .modal-sheet.open {
+      transform: translateY(0);
     }
-    .add-opts::-webkit-scrollbar { display: none; }
 
-    /* Priority toggle */
-    .prio-toggle {
-      display: flex;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      flex-shrink: 0;
+    /* drag pill */
+    .sheet-pill {
+      width: 40px; height: 4px;
+      background: var(--border2);
+      border-radius: 99px;
+      margin: 12px auto 20px;
     }
-    .prio-opt {
-      padding: 5px 9px;
-      font-size: 0.62rem;
+
+    /* Sheet header */
+    .sheet-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+    .sheet-title {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+    }
+    .sheet-close {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-soft);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      transition: background 0.14s, color 0.14s;
+    }
+    .sheet-close:hover { background: var(--surface2); color: var(--ink); }
+
+    /* Form fields */
+    .field-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .field-group { margin-bottom: 20px; }
+
+    .sheet-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .sheet-input::placeholder { color: var(--ink-faint); font-weight: 400; }
+    .sheet-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .sheet-textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--ink);
+      outline: none;
+      resize: none;
+      min-height: 72px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .sheet-textarea::placeholder { color: var(--ink-faint); }
+    .sheet-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    /* Priority selector */
+    .prio-group {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 8px;
+    }
+    .prio-card {
+      padding: 10px 8px;
+      border-radius: 11px;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.14s, background 0.14s, transform 0.1s;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .prio-card:active { transform: scale(0.96); }
+    .prio-card .picon { font-size: 1.2rem; }
+    .prio-card .plabel { font-size: 0.65rem; font-weight: 800; color: var(--ink-soft); letter-spacing: 0.5px; }
+    .prio-card[data-p="high"].sel  { border-color: var(--p-high);   background: rgba(229,62,62,0.08);  }
+    .prio-card[data-p="medium"].sel{ border-color: var(--p-mid);    background: rgba(217,119,6,0.08);  }
+    .prio-card[data-p="low"].sel   { border-color: var(--p-low);    background: rgba(56,161,105,0.08); }
+    .prio-card[data-p="high"].sel  .plabel { color: var(--p-high); }
+    .prio-card[data-p="medium"].sel .plabel{ color: var(--p-mid); }
+    .prio-card[data-p="low"].sel   .plabel { color: var(--p-low); }
+
+    /* Category chips in modal */
+    .modal-cat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .mcat {
+      padding: 7px 13px;
+      border-radius: 9px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all 0.14s;
+      white-space: nowrap;
+    }
+    .mcat:active { transform: scale(0.94); }
+    .mcat.sel { color: #fff; border-color: transparent; }
+    .mcat[data-c="general"].sel   { background: var(--c-general); }
+    .mcat[data-c="physics"].sel   { background: var(--c-physics); }
+    .mcat[data-c="chemistry"].sel { background: var(--c-chemistry); }
+    .mcat[data-c="maths"].sel     { background: var(--c-maths); }
+    .mcat[data-c="hindi"].sel     { background: var(--c-hindi); }
+    .mcat[data-c="english"].sel   { background: var(--c-english); }
+    .mcat[data-c="exam"].sel      { background: var(--c-exam); }
+    .mcat[data-c="revision"].sel  { background: var(--c-revision); color: #1a1a1a; }
+
+    /* Date field */
+    .sheet-date {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .sheet-date:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    /* Submit button */
+    .sheet-submit {
+      width: 100%;
+      padding: 15px;
+      border-radius: 13px;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
-      border: none;
-      background: var(--surface);
-      color: var(--ink-soft);
-      transition: background 0.12s, color 0.12s;
-      white-space: nowrap;
+      letter-spacing: 0.2px;
+      transition: background 0.14s, transform 0.12s, box-shadow 0.14s;
+      box-shadow: 0 3px 14px rgba(194,65,12,0.32);
+      margin-top: 4px;
     }
-    .prio-opt + .prio-opt { border-left: 1px solid var(--border); }
-    .prio-opt.sel-high   { background: var(--p-high); color: #fff; }
-    .prio-opt.sel-medium { background: var(--p-mid);  color: #fff; }
-    .prio-opt.sel-low    { background: var(--p-low);  color: #fff; }
-
-    .opts-sep { width: 1px; height: 18px; background: var(--border); flex-shrink: 0; }
-
-    /* Category selector */
-    .cat-select {
-      flex-shrink: 0;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--ink-soft);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 5px 9px;
-      cursor: pointer;
-      outline: none;
-    }
-
-    /* Date button */
-    .date-wrap { position: relative; flex-shrink: 0; }
-    .date-btn {
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--ink-soft);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 5px 9px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.12s, border-color 0.12s;
-    }
-    .date-btn.has-date { background: rgba(217,119,6,0.1); border-color: var(--amber); color: var(--amber); }
-    .date-hidden { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; top: 0; left: 0; }
+    .sheet-submit:hover  { background: #a83509; box-shadow: 0 4px 18px rgba(194,65,12,0.42); }
+    .sheet-submit:active { transform: scale(0.98); }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        TOAST & CELEBRATE
     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     .toast {
       position: fixed;
-      bottom: 105px;
+      bottom: 110px;
       left: 50%;
       transform: translateX(-50%) translateY(8px);
       background: var(--ink);
@@ -678,7 +797,8 @@
     /* ── Responsive ── */
     @media (max-width: 480px) {
       .scroll-area { padding-left: 14px; padding-right: 14px; }
-      .topnav, .filter-bar, .add-bar { padding-left: 14px; padding-right: 14px; }
+      .topnav, .filter-bar { padding-left: 14px; padding-right: 14px; }
+      .modal-sheet { padding-left: 16px; padding-right: 16px; }
     }
   </style>
 </head>
@@ -756,35 +876,75 @@
   </div>
 </div>
 
-<!-- ── Add Task Bar ────────────────────────────────────── -->
-<div class="add-bar">
-  <div class="add-main-row">
-    <input class="add-input" id="addInput" type="text" placeholder="नया task लिखें… Add a task" autocomplete="off" />
-    <button class="add-submit" id="addBtn">+</button>
+<!-- ── Floating Action Button ─────────────────────────── -->
+<button class="fab" id="fab">+</button>
+
+<!-- ── Modal Overlay ──────────────────────────────────── -->
+<div class="modal-overlay" id="modalOverlay"></div>
+
+<!-- ── Add Task Sheet ─────────────────────────────────── -->
+<div class="modal-sheet" id="modalSheet">
+  <div class="sheet-pill"></div>
+  <div class="sheet-head">
+    <div class="sheet-title">नया Task जोड़ें</div>
+    <button class="sheet-close" id="sheetClose">✕</button>
   </div>
-  <div class="add-opts" id="addOpts">
-    <div class="prio-toggle">
-      <div class="prio-opt sel-high" data-p="high">🔴 High</div>
-      <div class="prio-opt" data-p="medium">🟡 Mid</div>
-      <div class="prio-opt" data-p="low">🟢 Low</div>
-    </div>
-    <div class="opts-sep"></div>
-    <select class="cat-select" id="catSel">
-      <option value="general">📋 General</option>
-      <option value="physics">⚛️ Physics</option>
-      <option value="chemistry">🧪 Chemistry</option>
-      <option value="maths">📐 Maths</option>
-      <option value="hindi">📖 Hindi</option>
-      <option value="english">✍️ English</option>
-      <option value="exam">📝 Exam</option>
-      <option value="revision">🔁 Revision</option>
-    </select>
-    <div class="opts-sep"></div>
-    <div class="date-wrap">
-      <div class="date-btn" id="dateBtnLbl">📅 Date</div>
-      <input type="date" class="date-hidden" id="dateHidden" />
+
+  <!-- Task title -->
+  <div class="field-group">
+    <label class="field-label">Task</label>
+    <input class="sheet-input" id="sheetInput" type="text"
+      placeholder="क्या करना है? What to do?" autocomplete="off" />
+  </div>
+
+  <!-- Priority -->
+  <div class="field-group">
+    <label class="field-label">Priority</label>
+    <div class="prio-group">
+      <div class="prio-card sel" data-p="high">
+        <span class="picon">🔴</span>
+        <span class="plabel">HIGH</span>
+      </div>
+      <div class="prio-card" data-p="medium">
+        <span class="picon">🟡</span>
+        <span class="plabel">MEDIUM</span>
+      </div>
+      <div class="prio-card" data-p="low">
+        <span class="picon">🟢</span>
+        <span class="plabel">LOW</span>
+      </div>
     </div>
   </div>
+
+  <!-- Subject / Category -->
+  <div class="field-group">
+    <label class="field-label">Subject</label>
+    <div class="modal-cat-row">
+      <div class="mcat sel" data-c="general">📋 General</div>
+      <div class="mcat" data-c="physics">⚛️ Physics</div>
+      <div class="mcat" data-c="chemistry">🧪 Chemistry</div>
+      <div class="mcat" data-c="maths">📐 Maths</div>
+      <div class="mcat" data-c="hindi">📖 Hindi</div>
+      <div class="mcat" data-c="english">✍️ English</div>
+      <div class="mcat" data-c="exam">📝 Exam</div>
+      <div class="mcat" data-c="revision">🔁 Revision</div>
+    </div>
+  </div>
+
+  <!-- Due Date -->
+  <div class="field-group">
+    <label class="field-label">Due Date <span style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--ink-faint)">(optional)</span></label>
+    <input class="sheet-date" id="sheetDate" type="date" />
+  </div>
+
+  <!-- Notes -->
+  <div class="field-group">
+    <label class="field-label">Notes <span style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--ink-faint)">(optional)</span></label>
+    <textarea class="sheet-textarea" id="sheetNotes" placeholder="कोई अतिरिक्त जानकारी… Extra details, reminders…"></textarea>
+  </div>
+
+  <!-- Submit -->
+  <button class="sheet-submit" id="sheetSubmit">✓ &nbsp;Task जोड़ें — Add Task</button>
 </div>
 
 <!-- Toast -->
@@ -821,13 +981,15 @@
   let tasks = load();
 
   /* ── App State ──────────────────────────────────────── */
-  let filter   = 'all';
+  let filter    = 'all';
   let catFilter = 'all';
-  let sortMode = 'created';
-  let query    = '';
-  let selPriority = 'high';
-  let selCat      = 'general';
-  let selDate     = '';
+  let sortMode  = 'created';
+  let query     = '';
+
+  /* ── Modal State ────────────────────────────────────── */
+  let modalOpen    = false;
+  let mPriority    = 'high';
+  let mCat         = 'general';
 
   /* ── Helpers ────────────────────────────────────────── */
   function todayStr() {
@@ -1046,27 +1208,105 @@
     if (t) { t.notes = val.trim(); persist(tasks); }
   }
 
+  /* ── Modal open / close ─────────────────────────────── */
+  const fab          = document.getElementById('fab');
+  const overlay      = document.getElementById('modalOverlay');
+  const sheet        = document.getElementById('modalSheet');
+  const sheetClose   = document.getElementById('sheetClose');
+  const sheetSubmit  = document.getElementById('sheetSubmit');
+  const sheetInput   = document.getElementById('sheetInput');
+  const sheetDate    = document.getElementById('sheetDate');
+  const sheetNotes   = document.getElementById('sheetNotes');
+
+  function openModal() {
+    modalOpen = true;
+    fab.classList.add('open');
+    overlay.classList.add('open');
+    sheet.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => sheetInput.focus(), 340);
+  }
+
+  function closeModal() {
+    modalOpen = false;
+    fab.classList.remove('open');
+    overlay.classList.remove('open');
+    sheet.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function resetModal() {
+    sheetInput.value  = '';
+    sheetDate.value   = '';
+    sheetNotes.value  = '';
+    mPriority = 'high';
+    mCat      = 'general';
+    document.querySelectorAll('.prio-card').forEach(c => c.classList.remove('sel'));
+    document.querySelector('.prio-card[data-p="high"]').classList.add('sel');
+    document.querySelectorAll('.mcat').forEach(c => c.classList.remove('sel'));
+    document.querySelector('.mcat[data-c="general"]').classList.add('sel');
+  }
+
+  fab.addEventListener('click', () => {
+    if (modalOpen) { closeModal(); }
+    else { resetModal(); openModal(); }
+  });
+  overlay.addEventListener('click', closeModal);
+  sheetClose.addEventListener('click', closeModal);
+
+  /* ── Priority cards in modal ─────────────────────────── */
+  document.querySelectorAll('.prio-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.prio-card').forEach(c => c.classList.remove('sel'));
+      card.classList.add('sel');
+      mPriority = card.dataset.p;
+    });
+  });
+
+  /* ── Category chips in modal ─────────────────────────── */
+  document.querySelectorAll('.mcat').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.mcat').forEach(c => c.classList.remove('sel'));
+      chip.classList.add('sel');
+      mCat = chip.dataset.c;
+    });
+  });
+
+  /* ── Submit ─────────────────────────────────────────── */
   function addTask() {
-    const inp  = document.getElementById('addInput');
-    const text = inp.value.trim();
-    if (!text) { inp.focus(); return; }
+    const text = sheetInput.value.trim();
+    if (!text) {
+      sheetInput.focus();
+      sheetInput.style.borderColor = 'var(--p-high)';
+      setTimeout(() => sheetInput.style.borderColor = '', 1000);
+      return;
+    }
     const t = {
       id: uid(), text,
-      notes: '',
-      category: selCat,
-      priority: selPriority,
-      dueDate:  selDate || null,
+      notes:    sheetNotes.value.trim(),
+      category: mCat,
+      priority: mPriority,
+      dueDate:  sheetDate.value || null,
       done: false, doneAt: null,
       createdAt: Date.now()
     };
     tasks.unshift(t);
     persist(tasks);
-    inp.value = '';
-    closeOpts();
+    closeModal();
     render(t.id);
     document.querySelector('.scroll-area').scrollTo({ top: 0, behavior: 'smooth' });
-    toast('+ Task जोड़ा गया!');
+    toast('✓ Task जोड़ा गया!');
   }
+
+  sheetSubmit.addEventListener('click', addTask);
+  sheetInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); addTask(); }
+    if (e.key === 'Escape') closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modalOpen) closeModal();
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); resetModal(); openModal(); }
+  });
 
   function clearDone() {
     const n = tasks.filter(t => t.done).length;
@@ -1076,48 +1316,6 @@
     render();
     toast(`${n} done task${n>1?'s':''} हटाए`);
   }
-
-  /* ── Add Options ────────────────────────────────────── */
-  function openOpts()  { document.getElementById('addOpts').classList.add('open'); }
-  function closeOpts() { document.getElementById('addOpts').classList.remove('open'); }
-
-  document.getElementById('addInput').addEventListener('focus', openOpts);
-  document.getElementById('addInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') addTask();
-    if (e.key === 'Escape') { document.getElementById('addInput').blur(); closeOpts(); }
-  });
-  document.getElementById('addBtn').addEventListener('click', addTask);
-
-  document.querySelectorAll('.prio-opt').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.prio-opt').forEach(b => b.className = 'prio-opt');
-      selPriority = btn.dataset.p;
-      btn.classList.add('sel-' + selPriority);
-    });
-  });
-
-  document.getElementById('catSel').addEventListener('change', e => { selCat = e.target.value; });
-
-  document.getElementById('dateBtnLbl').addEventListener('click', () => {
-    const h = document.getElementById('dateHidden');
-    h.showPicker ? h.showPicker() : h.click();
-  });
-  document.getElementById('dateHidden').addEventListener('change', e => {
-    selDate = e.target.value;
-    const btn = document.getElementById('dateBtnLbl');
-    if (selDate) {
-      btn.textContent = '📅 ' + fmtDate(selDate);
-      btn.classList.add('has-date');
-    } else {
-      btn.textContent = '📅 Date';
-      btn.classList.remove('has-date');
-    }
-  });
-
-  /* Close opts when tapping outside */
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.add-bar')) closeOpts();
-  });
 
   /* ── Filter Tabs ────────────────────────────────────── */
   document.querySelectorAll('.ftab').forEach(btn => {
@@ -1153,15 +1351,6 @@
     else { query = ''; document.getElementById('searchInput').value = ''; render(); }
   });
   document.getElementById('searchInput').addEventListener('input', e => { query = e.target.value; render(); });
-
-  /* ── Keyboard Shortcuts ─────────────────────────────── */
-  document.addEventListener('keydown', e => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      document.getElementById('addInput').focus();
-      openOpts();
-    }
-  });
 
   /* ── Swipe to delete ────────────────────────────────── */
   let txStart = 0;
