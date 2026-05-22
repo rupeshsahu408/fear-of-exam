@@ -88,27 +88,29 @@
       position: relative;
     }
     @keyframes divineGlow {
-      0%   { filter: drop-shadow(0 0 18px rgba(218,165,32,0.35)) drop-shadow(0 0 40px rgba(255,200,50,0.15)); opacity: 0.18; }
-      50%  { filter: drop-shadow(0 0 48px rgba(218,165,32,0.70)) drop-shadow(0 0 90px rgba(255,200,50,0.30)); opacity: 0.26; }
-      100% { filter: drop-shadow(0 0 18px rgba(218,165,32,0.35)) drop-shadow(0 0 40px rgba(255,200,50,0.15)); opacity: 0.18; }
+      0%   { filter: drop-shadow(0 0 24px rgba(218,165,32,0.40)) drop-shadow(0 0 60px rgba(255,200,50,0.18)) brightness(1.08) contrast(0.92); opacity: 0.30; }
+      50%  { filter: drop-shadow(0 0 60px rgba(218,165,32,0.75)) drop-shadow(0 0 120px rgba(255,200,50,0.32)) brightness(1.18) contrast(0.88); opacity: 0.42; }
+      100% { filter: drop-shadow(0 0 24px rgba(218,165,32,0.40)) drop-shadow(0 0 60px rgba(255,200,50,0.18)) brightness(1.08) contrast(0.92); opacity: 0.30; }
     }
     @keyframes divineGlowDark {
-      0%   { filter: drop-shadow(0 0 18px rgba(218,165,32,0.25)) drop-shadow(0 0 40px rgba(255,200,50,0.10)); opacity: 0.10; }
-      50%  { filter: drop-shadow(0 0 48px rgba(218,165,32,0.50)) drop-shadow(0 0 90px rgba(255,200,50,0.22)); opacity: 0.16; }
-      100% { filter: drop-shadow(0 0 18px rgba(218,165,32,0.25)) drop-shadow(0 0 40px rgba(255,200,50,0.10)); opacity: 0.10; }
+      0%   { filter: drop-shadow(0 0 24px rgba(218,165,32,0.30)) drop-shadow(0 0 60px rgba(255,200,50,0.12)) brightness(1.06) contrast(0.94); opacity: 0.18; }
+      50%  { filter: drop-shadow(0 0 60px rgba(218,165,32,0.58)) drop-shadow(0 0 120px rgba(255,200,50,0.24)) brightness(1.14) contrast(0.90); opacity: 0.28; }
+      100% { filter: drop-shadow(0 0 24px rgba(218,165,32,0.30)) drop-shadow(0 0 60px rgba(255,200,50,0.12)) brightness(1.06) contrast(0.94); opacity: 0.18; }
     }
 
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: url('/public/saraswati_transparent.png') center 15% / auto 85% no-repeat;
-      opacity: 0.18;
+      background: url('/public/saraswati_transparent.png') center 10% / auto 100% no-repeat;
+      opacity: 0.30;
       z-index: 0;
       pointer-events: none;
+      mix-blend-mode: luminosity;
       animation: divineGlow 4s ease-in-out infinite;
     }
     [data-theme="dark"] body::before {
+      mix-blend-mode: screen;
       animation: divineGlowDark 4s ease-in-out infinite;
     }
 
