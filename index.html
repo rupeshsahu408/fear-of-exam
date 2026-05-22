@@ -24,6 +24,46 @@
       --amber:     #d97706;
     }
 
+    [data-theme="dark"] {
+      --bg:        #1a1a1a;
+      --surface:   #242424;
+      --surface2:  #2e2e2e;
+      --border:    #3d3d3d;
+      --border2:   #525252;
+      --ink:       #faf6f1;
+      --ink-mid:   #c8c0b8;
+      --ink-soft:  #9a9290;
+      --ink-faint: #585250;
+      --accent:    #e8622a;
+      --accent2:   #f97316;
+      --amber:     #f59e0b;
+    }
+
+    html { transition: background 0.25s, color 0.25s; }
+
+    /* ── Theme toggle button ─────────────────── */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--ink-soft);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .theme-toggle:hover { border-color: var(--border2); color: var(--ink); }
+
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
@@ -398,6 +438,12 @@
 </head>
 <body>
 
+<!-- Theme Toggle -->
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+  <span id="themeIcon">🌙</span>
+  <span id="themeLabel">Dark</span>
+</button>
+
 <div class="timer-fab">
   <a href="/timer.html">
     <span class="fab-icon">⏱</span>
@@ -570,6 +616,18 @@
 </div>
 
 <script>
+  // ── Theme ────────────────────────────────────────────────────
+  function applyTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
+    document.getElementById('themeIcon').textContent  = dark ? '☀️' : '🌙';
+    document.getElementById('themeLabel').textContent = dark ? 'Light' : 'Dark';
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+  function toggleTheme() {
+    applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+  }
+  applyTheme(localStorage.getItem('theme') === 'dark');
+
   // ── Quotes ────────────────────────────────────────────────────
   const quotes = [
     { text: "सपने वो नहीं जो नींद में आते हैं, सपने वो हैं जो नींद उड़ा देते हैं।", author: "Dr. A.P.J. Abdul Kalam" },
