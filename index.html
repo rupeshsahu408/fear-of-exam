@@ -386,6 +386,60 @@
     }
     .footer strong { color: var(--text-muted); font-weight: 600; }
 
+    /* ── Timer button (fixed sidebar) ──────────────────────────── */
+    .timer-fab {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 50;
+    }
+    .timer-fab a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 10px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      writing-mode: vertical-lr;
+      writing-mode: initial;
+    }
+    .timer-fab a:hover {
+      border-color: var(--green-2);
+      color: var(--green-1);
+      background: var(--surface2);
+    }
+    .timer-fab .fab-icon { font-size: 1.4rem; }
+    .timer-fab .fab-label {
+      font-size: 0.6rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .timer-fab {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+        transform: none;
+        flex-direction: row;
+      }
+    }
+
     @media (max-width: 480px) {
       .unit { min-width: 76px; padding: 14px 8px 10px; }
       .sep  { display: none; }
@@ -394,6 +448,14 @@
   </style>
 </head>
 <body>
+<!-- Fixed Timer Button -->
+<div class="timer-fab">
+  <a href="/timer.html">
+    <span class="fab-icon">⏱</span>
+    <span class="fab-label">Timer</span>
+  </a>
+</div>
+
 <div class="container">
 
   <div class="badge">Bihar Board 2027 &nbsp;·&nbsp; Class XII PCM</div>
