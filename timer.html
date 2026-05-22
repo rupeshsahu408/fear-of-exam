@@ -5,111 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pomodoro Timer — Bihar Board 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d1a12;
-      --surface:   #132019;
-      --surface2:  #1a2d22;
-      --border:    #2a4535;
-      --green-1:   #22c55e;
-      --green-2:   #16a34a;
-      --green-3:   #4ade80;
-      --green-dim: #166534;
-      --text:      #e8f5ee;
-      --text-muted:#7aab8a;
-      --text-faint:#3d6b4e;
-      --red:       #ef4444;
-      --amber:     #f59e0b;
+      --bg:        #faf6f1;
+      --surface:   #f0ebe3;
+      --surface2:  #e8e1d8;
+      --border:    #d4ccc3;
+      --border2:   #c4bbb0;
+      --ink:       #1a1a1a;
+      --ink-mid:   #4a4035;
+      --ink-soft:  #7a7068;
+      --ink-faint: #b0a89e;
+      --accent:    #c2410c;
+      --amber:     #d97706;
+      --red:       #dc2626;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
       background: var(--bg);
-      color: var(--text);
+      color: var(--ink);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px 16px 48px;
+      padding: 32px 16px 56px;
     }
 
-    /* ── Top nav ────────────────────────────── */
+    /* ── Top nav ─────────────────────────────── */
     .topnav {
       width: 100%;
       max-width: 680px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
     .back-btn {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--ink);
       border-radius: 50px;
-      padding: 8px 18px;
-      color: var(--text-muted);
-      font-size: 0.82rem;
-      font-weight: 600;
+      padding: 9px 20px;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 800;
       text-decoration: none;
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s;
+      transition: opacity 0.15s;
     }
-    .back-btn:hover { border-color: var(--green-dim); color: var(--text); }
-    .back-btn svg { flex-shrink: 0; }
+    .back-btn:hover { opacity: 0.8; }
 
     .page-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--green-1);
-      letter-spacing: 1.5px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: var(--ink-soft);
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    /* ── Main card ──────────────────────────── */
+    /* ── Main card ───────────────────────────── */
     .card {
       width: 100%;
       max-width: 680px;
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 20px;
       padding: 28px 28px 32px;
       margin-bottom: 20px;
     }
 
-    /* ── Mode tabs ──────────────────────────── */
+    /* ── Mode tabs ───────────────────────────── */
     .mode-tabs {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       margin-bottom: 28px;
       background: var(--surface2);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 12px;
       padding: 5px;
     }
     .mode-tab {
       flex: 1;
       text-align: center;
-      padding: 8px 6px;
+      padding: 9px 6px;
       border-radius: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--text-faint);
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--ink-faint);
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
       user-select: none;
+      line-height: 1.4;
     }
+    .mode-tab small { font-weight: 600; font-size: 0.62rem; opacity: 0.7; }
     .mode-tab.active {
-      background: var(--green-dim);
-      color: var(--green-3);
+      background: var(--ink);
+      color: #fff;
     }
 
-    /* ── Subject + Chapter selectors ─────────── */
+    /* ── Selectors ───────────────────────────── */
     .selectors {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -120,39 +118,39 @@
 
     .field label {
       display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--text-faint);
-      letter-spacing: 1.5px;
+      font-size: 0.65rem;
+      font-weight: 900;
+      color: var(--ink-faint);
+      letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 7px;
     }
     .field select,
     .field input {
       width: 100%;
-      background: var(--surface2);
-      border: 1px solid var(--border);
+      background: var(--bg);
+      border: 1.5px solid var(--border);
       border-radius: 10px;
-      padding: 10px 14px;
-      color: var(--text);
+      padding: 11px 14px;
+      color: var(--ink);
       font-size: 0.88rem;
       font-family: inherit;
+      font-weight: 700;
       outline: none;
       transition: border-color 0.15s;
       appearance: none;
     }
     .field select:focus,
-    .field input:focus { border-color: var(--green-2); }
-    .field input::placeholder { color: var(--text-faint); }
+    .field input:focus { border-color: var(--border2); }
+    .field input::placeholder { color: var(--ink-faint); font-weight: 600; }
 
-    /* ── Timer ring ─────────────────────────── */
+    /* ── Timer ring ──────────────────────────── */
     .timer-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 28px;
     }
-
     .ring-container {
       position: relative;
       width: 220px;
@@ -164,14 +162,10 @@
       width: 220px;
       height: 220px;
     }
-    .ring-bg {
-      fill: none;
-      stroke: var(--surface2);
-      stroke-width: 10;
-    }
+    .ring-bg   { fill: none; stroke: var(--surface2); stroke-width: 10; }
     .ring-fill {
       fill: none;
-      stroke: var(--green-2);
+      stroke: var(--ink);
       stroke-width: 10;
       stroke-linecap: round;
       stroke-dasharray: 628;
@@ -191,37 +185,35 @@
     }
     .timer-display {
       font-size: 3rem;
-      font-weight: 800;
-      color: var(--text);
+      font-weight: 900;
+      color: var(--ink);
       font-variant-numeric: tabular-nums;
+      letter-spacing: -2px;
       line-height: 1;
     }
     .timer-mode-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 2px;
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--text-faint);
+      color: var(--ink-faint);
       margin-top: 6px;
     }
 
-    /* ── Session info ────────────────────────── */
-    .session-info {
-      text-align: center;
-      margin-bottom: 4px;
-    }
+    .session-info { text-align: center; }
     .session-subject {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--green-1);
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--ink);
     }
     .session-chapter {
       font-size: 0.75rem;
-      color: var(--text-faint);
+      color: var(--ink-soft);
       margin-top: 2px;
+      font-weight: 700;
     }
 
-    /* ── Controls ───────────────────────────── */
+    /* ── Controls ────────────────────────────── */
     .controls {
       display: flex;
       gap: 12px;
@@ -235,31 +227,30 @@
       border: none;
       border-radius: 12px;
       font-family: inherit;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       transition: opacity 0.15s, transform 0.1s;
     }
     .btn:active { transform: scale(0.97); }
 
     .btn-primary {
-      background: var(--green-2);
+      background: var(--ink);
       color: #fff;
       font-size: 1rem;
-      padding: 14px 36px;
+      padding: 14px 40px;
     }
-    .btn-primary:hover { opacity: 0.88; }
-    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-primary:hover { opacity: 0.85; }
 
     .btn-secondary {
       background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
+      border: 1.5px solid var(--border);
+      color: var(--ink-mid);
       font-size: 0.85rem;
       padding: 14px 20px;
     }
-    .btn-secondary:hover { border-color: var(--green-dim); color: var(--text); }
+    .btn-secondary:hover { border-color: var(--border2); }
 
-    /* ── Sessions counter ────────────────────── */
+    /* ── Sessions dots ────────────────────────── */
     .sessions-row {
       display: flex;
       align-items: center;
@@ -271,24 +262,24 @@
       width: 10px; height: 10px;
       border-radius: 50%;
       background: var(--surface2);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       transition: background 0.3s;
     }
-    .session-dot.done { background: var(--green-2); border-color: var(--green-2); }
+    .session-dot.done { background: var(--ink); border-color: var(--ink); }
     .sessions-label {
-      font-size: 0.68rem;
-      color: var(--text-faint);
-      letter-spacing: 1px;
+      font-size: 0.65rem;
+      color: var(--ink-faint);
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 800;
     }
 
-    /* ── Shabash overlay ─────────────────────── */
+    /* ── Shabash overlay ──────────────────────── */
     .overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.75);
+      background: rgba(26,26,26,0.6);
       z-index: 100;
       align-items: center;
       justify-content: center;
@@ -297,8 +288,8 @@
     .overlay.show { display: flex; }
 
     .shabash-card {
-      background: var(--surface);
-      border: 1px solid var(--green-2);
+      background: var(--bg);
+      border: 2px solid var(--ink);
       border-radius: 24px;
       padding: 40px 36px;
       text-align: center;
@@ -307,18 +298,20 @@
     }
     .shabash-emoji { font-size: 4rem; margin-bottom: 12px; }
     .shabash-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--green-1);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--ink);
       margin-bottom: 8px;
+      letter-spacing: -1px;
     }
     .shabash-sub {
       font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.6;
+      color: var(--ink-soft);
+      line-height: 1.7;
       margin-bottom: 24px;
+      font-weight: 600;
     }
-    .shabash-sub span { color: var(--green-3); font-weight: 700; }
+    .shabash-sub span { color: var(--ink); font-weight: 900; }
 
     .shabash-actions {
       display: flex;
@@ -328,89 +321,87 @@
     }
     .btn-break {
       background: var(--amber);
-      color: #000;
-      font-size: 0.88rem;
+      color: #fff;
+      font-size: 0.85rem;
       padding: 11px 22px;
       border-radius: 10px;
       border: none;
       font-family: inherit;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
     }
     .btn-again {
-      background: var(--green-2);
+      background: var(--ink);
       color: #fff;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       padding: 11px 22px;
       border-radius: 10px;
       border: none;
       font-family: inherit;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
     }
     .btn-close-overlay {
       background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.88rem;
+      border: 1.5px solid var(--border);
+      color: var(--ink-mid);
+      font-size: 0.85rem;
       padding: 11px 22px;
       border-radius: 10px;
       font-family: inherit;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
     }
 
-    /* ── Tips card ───────────────────────────── */
+    /* ── Tips card ────────────────────────────── */
     .tips-card {
       width: 100%;
       max-width: 680px;
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--green-dim);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--ink);
       border-radius: 14px;
       padding: 16px 20px;
     }
     .tips-title {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--text-faint);
-      letter-spacing: 1.5px;
+      font-size: 0.65rem;
+      font-weight: 900;
+      color: var(--ink-faint);
+      letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 8px;
     }
     .tips-text {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.7;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      font-weight: 600;
     }
+    .tips-text strong { color: var(--ink); font-weight: 900; }
   </style>
 </head>
 <body>
 
-  <!-- Top nav -->
   <nav class="topnav">
     <a class="back-btn" href="/">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 12H5M12 5l-7 7 7 7"/>
       </svg>
       वापस जाएं
     </a>
     <span class="page-title">⏱ Pomodoro Timer</span>
-    <div style="width:110px"></div>
+    <div style="width:120px"></div>
   </nav>
 
-  <!-- Main card -->
   <div class="card">
 
-    <!-- Mode tabs -->
     <div class="mode-tabs">
-      <div class="mode-tab active" data-mins="25">25 min<br><small style="font-weight:400;font-size:0.65rem;opacity:0.7">Pomodoro</small></div>
-      <div class="mode-tab" data-mins="45">45 min<br><small style="font-weight:400;font-size:0.65rem;opacity:0.7">Deep Work</small></div>
-      <div class="mode-tab" data-mins="60">60 min<br><small style="font-weight:400;font-size:0.65rem;opacity:0.7">Long Focus</small></div>
-      <div class="mode-tab" data-mins="5">5 min<br><small style="font-weight:400;font-size:0.65rem;opacity:0.7">Break</small></div>
+      <div class="mode-tab active" data-mins="25">25 min<br><small>Pomodoro</small></div>
+      <div class="mode-tab" data-mins="45">45 min<br><small>Deep Work</small></div>
+      <div class="mode-tab" data-mins="60">60 min<br><small>Long Focus</small></div>
+      <div class="mode-tab" data-mins="5">5 min<br><small>Break</small></div>
     </div>
 
-    <!-- Subject + Chapter -->
     <div class="selectors">
       <div class="field">
         <label>Subject — विषय</label>
@@ -429,7 +420,6 @@
       </div>
     </div>
 
-    <!-- Timer ring -->
     <div class="timer-wrap">
       <div class="ring-container">
         <svg class="ring-svg" viewBox="0 0 220 220">
@@ -441,25 +431,20 @@
           <div class="timer-mode-label" id="modeLabel">FOCUS</div>
         </div>
       </div>
-
       <div class="session-info">
         <div class="session-subject" id="sessionSubject">Subject चुनें</div>
         <div class="session-chapter" id="sessionChapter"></div>
       </div>
     </div>
 
-    <!-- Controls -->
     <div class="controls">
-      <button class="btn btn-secondary" id="resetBtn" onclick="resetTimer()">
+      <button class="btn btn-secondary" onclick="resetTimer()">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
         Reset
       </button>
-      <button class="btn btn-primary" id="startBtn" onclick="toggleTimer()">
-        ▶ Start
-      </button>
+      <button class="btn btn-primary" id="startBtn" onclick="toggleTimer()">▶ Start</button>
     </div>
 
-    <!-- Sessions dots -->
     <div class="sessions-row">
       <span class="sessions-label">Sessions:</span>
       <div class="session-dot" id="dot1"></div>
@@ -470,21 +455,19 @@
 
   </div>
 
-  <!-- Tips card -->
   <div class="tips-card">
     <div class="tips-title">Pomodoro Technique — कैसे करें?</div>
     <div class="tips-text">
       Subject और Chapter चुनो → Timer Start करो → पूरे focus के साथ पढ़ो → Timer खत्म होने पर 5 मिनट का break लो।
-      हर 4 sessions के बाद एक बड़ा break (15-20 min) लो। <strong style="color:var(--green-1)">एक session = एक जीत।</strong>
+      हर 4 sessions के बाद एक बड़ा break (15–20 min) लो। <strong>एक session = एक जीत।</strong>
     </div>
   </div>
 
-  <!-- Shabash Overlay -->
   <div class="overlay" id="shabashOverlay">
     <div class="shabash-card">
       <div class="shabash-emoji" id="shabashEmoji">🎉</div>
       <div class="shabash-title" id="shabashTitle">शाबाश!</div>
-      <div class="shabash-sub" id="shabashSub">
+      <div class="shabash-sub">
         तूने <span id="shabashSubject">—</span> का <span id="shabashChapter">—</span> पूरा किया।<br>
         एक और कदम लक्ष्य की तरफ!
       </div>
@@ -497,39 +480,32 @@
   </div>
 
 <script>
-  // ── Config ────────────────────────────────────────────────────
-  const CIRCUMFERENCE = 2 * Math.PI * 100; // ~628
-  const ringFill      = document.getElementById('ringFill');
+  const CIRCUMFERENCE = 2 * Math.PI * 100;
+  const ringFill = document.getElementById('ringFill');
   ringFill.style.strokeDasharray  = CIRCUMFERENCE;
   ringFill.style.strokeDashoffset = 0;
 
-  let totalSeconds  = 25 * 60;
-  let remaining     = totalSeconds;
-  let running       = false;
-  let intervalId    = null;
-  let sessionsDone  = 0;
-  let isBreakMode   = false;
+  let totalSeconds = 25 * 60, remaining = totalSeconds;
+  let running = false, intervalId = null, sessionsDone = 0, isBreakMode = false;
 
-  // ── Mode tabs ─────────────────────────────────────────────────
   document.querySelectorAll('.mode-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       if (running) return;
       document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       const mins = parseInt(tab.dataset.mins);
-      isBreakMode = mins <= 5;
+      isBreakMode  = mins <= 5;
       totalSeconds = mins * 60;
       remaining    = totalSeconds;
       document.getElementById('modeLabel').textContent = isBreakMode ? 'BREAK' : 'FOCUS';
-      updateRing();
-      renderTime();
+      ringFill.classList.toggle('break', isBreakMode);
+      ringFill.classList.remove('low');
+      updateRing(); renderTime();
     });
   });
 
-  // ── Subject / Chapter display ──────────────────────────────────
   document.getElementById('subjectSel').addEventListener('change', updateSessionInfo);
   document.getElementById('chapterInput').addEventListener('input', updateSessionInfo);
-
   function updateSessionInfo() {
     const sub = document.getElementById('subjectSel').value;
     const ch  = document.getElementById('chapterInput').value.trim();
@@ -537,185 +513,108 @@
     document.getElementById('sessionChapter').textContent = ch  || '';
   }
 
-  // ── Timer logic ───────────────────────────────────────────────
-  function toggleTimer() {
-    if (running) { pauseTimer(); } else { startTimer(); }
-  }
-
+  function toggleTimer() { running ? pauseTimer() : startTimer(); }
   function startTimer() {
     running = true;
     document.getElementById('startBtn').textContent = '⏸ Pause';
     intervalId = setInterval(tick, 1000);
   }
-
   function pauseTimer() {
     running = false;
     clearInterval(intervalId);
     document.getElementById('startBtn').textContent = '▶ Resume';
   }
-
   function resetTimer() {
-    running = false;
-    clearInterval(intervalId);
+    running = false; clearInterval(intervalId);
     remaining = totalSeconds;
     document.getElementById('startBtn').textContent = '▶ Start';
-    updateRing();
-    renderTime();
+    ringFill.classList.remove('low');
+    updateRing(); renderTime();
   }
-
   function tick() {
-    if (remaining <= 0) {
-      clearInterval(intervalId);
-      running = false;
-      onTimerEnd();
-      return;
-    }
+    if (remaining <= 0) { clearInterval(intervalId); running = false; onTimerEnd(); return; }
     remaining--;
-    renderTime();
-    updateRing();
-
-    // Ring color: red when < 10% left
-    const pct = remaining / totalSeconds;
+    renderTime(); updateRing();
     if (!isBreakMode) {
-      if (pct < 0.1)       ringFill.classList.add('low'),   ringFill.classList.remove('break');
-      else                  ringFill.classList.remove('low'), ringFill.classList.remove('break');
-    } else {
-      ringFill.classList.add('break');
-      ringFill.classList.remove('low');
+      if (remaining / totalSeconds < 0.1) { ringFill.classList.add('low'); ringFill.classList.remove('break'); }
+      else { ringFill.classList.remove('low','break'); }
     }
   }
-
   function renderTime() {
-    const m = Math.floor(remaining / 60);
-    const s = remaining % 60;
-    document.getElementById('timerDisplay').textContent =
-      String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    const m = Math.floor(remaining/60), s = remaining%60;
+    document.getElementById('timerDisplay').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
   }
-
   function updateRing() {
-    const progress = remaining / totalSeconds;
-    const offset   = CIRCUMFERENCE * (1 - progress);
-    ringFill.style.strokeDashoffset = offset;
+    ringFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - remaining/totalSeconds);
   }
-
-  // ── Session complete ───────────────────────────────────────────
   function onTimerEnd() {
     document.getElementById('startBtn').textContent = '▶ Start';
-
-    if (!isBreakMode) {
-      // Count session
-      sessionsDone = Math.min(sessionsDone + 1, 4);
-      updateDots();
-      playShaBashSound();
-      showShaBash();
-    } else {
-      // Break done — gentle beep
-      playBreakEndSound();
-      document.getElementById('modeLabel').textContent = 'BREAK OVER!';
-    }
+    if (!isBreakMode) { sessionsDone = Math.min(sessionsDone+1,4); updateDots(); playShaBashSound(); showShaBash(); }
+    else { playBreakEndSound(); document.getElementById('modeLabel').textContent = 'BREAK OVER!'; }
   }
-
   function updateDots() {
-    for (let i = 1; i <= 4; i++) {
-      const dot = document.getElementById('dot' + i);
-      if (i <= sessionsDone) dot.classList.add('done');
-      else dot.classList.remove('done');
+    for(let i=1;i<=4;i++) {
+      const d=document.getElementById('dot'+i);
+      i<=sessionsDone ? d.classList.add('done') : d.classList.remove('done');
     }
-    if (sessionsDone === 4) sessionsDone = 0; // reset after full cycle
+    if(sessionsDone===4) sessionsDone=0;
   }
-
-  // ── Shabash overlay ───────────────────────────────────────────
   function showShaBash() {
-    const sub = document.getElementById('subjectSel').value || 'Subject';
-    const ch  = document.getElementById('chapterInput').value.trim() || 'chapter';
-    document.getElementById('shabashSubject').textContent = sub;
-    document.getElementById('shabashChapter').textContent = ch;
-
-    // Cycle motivational variants
-    const variants = [
-      { emoji:'🎉', title:'शाबाश!' },
-      { emoji:'🏆', title:'वाह! कमाल!' },
-      { emoji:'💪', title:'बहुत बढ़िया!' },
-      { emoji:'🌟', title:'शाबाश भाई!' },
-    ];
-    const v = variants[Math.floor(Math.random() * variants.length)];
-    document.getElementById('shabashEmoji').textContent = v.emoji;
-    document.getElementById('shabashTitle').textContent = v.title;
-
+    const sub=document.getElementById('subjectSel').value||'Subject';
+    const ch=document.getElementById('chapterInput').value.trim()||'chapter';
+    document.getElementById('shabashSubject').textContent=sub;
+    document.getElementById('shabashChapter').textContent=ch;
+    const v=[{e:'🎉',t:'शाबाश!'},{e:'🏆',t:'वाह! कमाल!'},{e:'💪',t:'बहुत बढ़िया!'},{e:'🌟',t:'शाबाश भाई!'}];
+    const pick=v[Math.floor(Math.random()*v.length)];
+    document.getElementById('shabashEmoji').textContent=pick.e;
+    document.getElementById('shabashTitle').textContent=pick.t;
     document.getElementById('shabashOverlay').classList.add('show');
   }
-
   function closeOverlay() {
     document.getElementById('shabashOverlay').classList.remove('show');
-    remaining = totalSeconds;
-    renderTime();
-    updateRing();
-    ringFill.classList.remove('low','break');
+    remaining=totalSeconds; renderTime(); updateRing(); ringFill.classList.remove('low','break');
   }
-
   function startBreakMode() {
     closeOverlay();
-    // Switch to 5-min break tab
-    document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));
     document.querySelector('.mode-tab[data-mins="5"]').classList.add('active');
-    isBreakMode  = true;
-    totalSeconds = 5 * 60;
-    remaining    = totalSeconds;
-    document.getElementById('modeLabel').textContent = 'BREAK';
-    ringFill.classList.add('break');
-    ringFill.classList.remove('low');
-    renderTime();
-    updateRing();
-    startTimer();
+    isBreakMode=true; totalSeconds=5*60; remaining=totalSeconds;
+    document.getElementById('modeLabel').textContent='BREAK';
+    ringFill.classList.add('break'); ringFill.classList.remove('low');
+    renderTime(); updateRing(); startTimer();
   }
+  function startAgain() { closeOverlay(); startTimer(); }
 
-  function startAgain() {
-    closeOverlay();
-    startTimer();
-  }
-
-  // ── Web Audio sounds ──────────────────────────────────────────
   function playShaBashSound() {
     try {
-      const ctx  = new (window.AudioContext || window.webkitAudioContext)();
-      const notes = [523, 659, 784, 1047]; // C5 E5 G5 C6
-      notes.forEach((freq, i) => {
-        const osc  = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.type      = 'sine';
-        osc.frequency.value = freq;
-        const start = ctx.currentTime + i * 0.18;
-        gain.gain.setValueAtTime(0, start);
-        gain.gain.linearRampToValueAtTime(0.35, start + 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.001, start + 0.5);
-        osc.start(start);
-        osc.stop(start + 0.55);
+      const ctx=new(window.AudioContext||window.webkitAudioContext)();
+      [523,659,784,1047].forEach((f,i)=>{
+        const o=ctx.createOscillator(), g=ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.type='sine'; o.frequency.value=f;
+        const t=ctx.currentTime+i*0.18;
+        g.gain.setValueAtTime(0,t);
+        g.gain.linearRampToValueAtTime(0.35,t+0.05);
+        g.gain.exponentialRampToValueAtTime(0.001,t+0.5);
+        o.start(t); o.stop(t+0.55);
       });
-    } catch(e) {}
+    } catch(e){}
   }
-
   function playBreakEndSound() {
     try {
-      const ctx  = new (window.AudioContext || window.webkitAudioContext)();
-      const osc  = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(440, ctx.currentTime);
-      osc.frequency.linearRampToValueAtTime(880, ctx.currentTime + 0.3);
-      gain.gain.setValueAtTime(0.3, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.8);
-    } catch(e) {}
+      const ctx=new(window.AudioContext||window.webkitAudioContext)();
+      const o=ctx.createOscillator(), g=ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.type='sine';
+      o.frequency.setValueAtTime(440,ctx.currentTime);
+      o.frequency.linearRampToValueAtTime(880,ctx.currentTime+0.3);
+      g.gain.setValueAtTime(0.3,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.8);
+      o.start(ctx.currentTime); o.stop(ctx.currentTime+0.8);
+    } catch(e){}
   }
 
-  // ── Init ──────────────────────────────────────────────────────
-  renderTime();
-  updateRing();
+  renderTime(); updateRing();
 </script>
 </body>
 </html>

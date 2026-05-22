@@ -5,34 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>मेरा लक्ष्य — Bihar Board 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d1a12;
-      --surface:   #132019;
-      --surface2:  #1a2d22;
-      --border:    #2a4535;
-      --green-1:   #22c55e;
-      --green-2:   #16a34a;
-      --green-3:   #4ade80;
-      --green-dim: #166534;
-      --text:      #e8f5ee;
-      --text-muted:#7aab8a;
-      --text-faint:#3d6b4e;
+      --bg:        #faf6f1;
+      --surface:   #f0ebe3;
+      --surface2:  #e8e1d8;
+      --border:    #d4ccc3;
+      --border2:   #c4bbb0;
+      --ink:       #1a1a1a;
+      --ink-mid:   #4a4035;
+      --ink-soft:  #7a7068;
+      --ink-faint: #b0a89e;
+      --accent:    #c2410c;
+      --accent2:   #ea580c;
+      --amber:     #d97706;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      padding: 40px 16px 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      background: var(--bg);
-      color: var(--text);
-      padding: 40px 16px 48px;
     }
 
     .container {
@@ -41,117 +41,115 @@
       text-align: center;
     }
 
-    /* Top badge */
+    /* ── Badge ─────────────────────────────── */
     .badge {
       display: inline-block;
-      background: var(--surface2);
-      border: 1px solid var(--border);
+      background: var(--ink);
+      color: var(--bg);
       border-radius: 50px;
       padding: 5px 18px;
-      font-size: 0.72rem;
-      font-weight: 600;
+      font-size: 0.7rem;
+      font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--green-1);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
+    /* ── Heading ───────────────────────────── */
     h1 {
-      font-size: clamp(1.5rem, 4vw, 2.4rem);
-      font-weight: 800;
-      line-height: 1.25;
-      color: var(--text);
-      margin-bottom: 6px;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
-    h1 span { color: var(--green-1); }
+    h1 span { color: var(--accent); }
 
     .subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      font-weight: 400;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      font-weight: 600;
       margin-bottom: 32px;
     }
 
-    /* Total days */
+    /* ── Total days ────────────────────────── */
     .total-days-banner {
       display: inline-flex;
       flex-direction: column;
       align-items: center;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px 48px;
+      background: var(--ink);
+      border-radius: 20px;
+      padding: 22px 52px;
       margin-bottom: 28px;
     }
     .total-days-num {
-      font-size: clamp(3rem, 8vw, 5rem);
-      font-weight: 800;
+      font-size: clamp(3.5rem, 9vw, 5.5rem);
+      font-weight: 900;
       line-height: 1;
-      color: var(--green-1);
+      color: #ffffff;
       font-variant-numeric: tabular-nums;
+      letter-spacing: -2px;
     }
     .total-days-label {
       font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
       margin-top: 4px;
     }
     .total-days-sub {
-      font-size: 0.68rem;
-      color: var(--text-faint);
-      letter-spacing: 1.5px;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-top: 5px;
+      margin-top: 6px;
+      font-weight: 700;
     }
 
-    /* Countdown grid */
+    /* ── Countdown ─────────────────────────── */
     .countdown {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 28px;
     }
-
     .unit {
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 14px;
-      padding: 20px 16px 14px;
+      padding: 18px 14px 12px;
       min-width: 106px;
-      flex: 1 1 90px;
-      max-width: 130px;
+      flex: 1 1 88px;
+      max-width: 128px;
     }
-
     .unit-value {
       font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-      font-weight: 700;
+      font-weight: 900;
       line-height: 1;
       margin-bottom: 6px;
-      color: var(--green-3);
+      color: var(--ink);
       font-variant-numeric: tabular-nums;
+      letter-spacing: -1px;
     }
-
     .unit-label {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--text-faint);
-      font-weight: 600;
+      color: var(--ink-faint);
+      font-weight: 800;
     }
-
-    /* Dividers between units */
     .sep {
       display: flex;
       align-items: center;
       font-size: 1.6rem;
-      font-weight: 300;
-      color: var(--text-faint);
-      padding-bottom: 14px;
+      font-weight: 900;
+      color: var(--border2);
+      padding-bottom: 12px;
       flex-shrink: 0;
     }
 
-    /* Progress bar */
+    /* ── Progress ──────────────────────────── */
     .progress-section {
       margin-bottom: 24px;
     }
@@ -159,63 +157,61 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.72rem;
-      color: var(--text-faint);
+      color: var(--ink-soft);
       margin-bottom: 8px;
-      font-weight: 500;
+      font-weight: 700;
     }
     .progress-bar-bg {
       background: var(--surface2);
-      border: 1px solid var(--border);
       border-radius: 50px;
-      height: 7px;
+      height: 8px;
       overflow: hidden;
+      border: 1px solid var(--border);
     }
     .progress-bar-fill {
       height: 100%;
       border-radius: 50px;
-      background: var(--green-2);
+      background: var(--ink);
       transition: width 1s ease;
     }
 
-    /* Quote card */
+    /* ── Quote ─────────────────────────────── */
     .quote-card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--green-2);
-      border-radius: 12px;
-      padding: 18px 24px;
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--ink);
+      border-radius: 14px;
+      padding: 20px 24px;
       margin-bottom: 24px;
       text-align: left;
     }
     .quote-text {
-      font-size: clamp(0.88rem, 2vw, 1rem);
-      font-weight: 400;
-      color: var(--text);
+      font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+      font-weight: 700;
+      color: var(--ink);
       line-height: 1.75;
       font-style: italic;
-      transition: opacity 0.6s;
+      transition: opacity 0.5s;
     }
     .quote-author {
       margin-top: 10px;
-      font-size: 0.7rem;
-      color: var(--green-1);
+      font-size: 0.72rem;
+      color: var(--ink-soft);
       letter-spacing: 1px;
       text-transform: uppercase;
-      font-weight: 600;
-      font-style: normal;
-      transition: opacity 0.6s;
+      font-weight: 800;
+      transition: opacity 0.5s;
     }
 
-    /* ── Study Tracker ────────────────────────────────────────── */
+    /* ── Study Tracker ─────────────────────── */
     .tracker {
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 16px;
       padding: 22px 24px;
       margin-bottom: 24px;
       text-align: left;
     }
-
     .tracker-header {
       display: flex;
       align-items: center;
@@ -224,42 +220,38 @@
       gap: 12px;
       margin-bottom: 18px;
     }
-
     .tracker-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: 0.5px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: 0.3px;
     }
     .tracker-date {
       font-size: 0.7rem;
-      color: var(--text-faint);
-      margin-top: 2px;
-      font-weight: 400;
+      color: var(--ink-soft);
+      margin-top: 3px;
+      font-weight: 700;
     }
-
-    /* Streak badge */
     .streak-badge {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
+      background: var(--ink);
       border-radius: 50px;
-      padding: 6px 16px;
+      padding: 8px 18px;
       flex-shrink: 0;
     }
     .streak-fire { font-size: 1rem; }
     .streak-count {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--green-1);
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #fff;
       line-height: 1;
     }
     .streak-label {
-      font-size: 0.65rem;
-      color: var(--text-faint);
-      font-weight: 600;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
       line-height: 1.3;
@@ -269,80 +261,61 @@
     .subject-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
-
     .subject-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--surface2);
-      border: 1px solid var(--border);
+      background: var(--bg);
+      border: 1.5px solid var(--border);
       border-radius: 10px;
       padding: 12px 16px;
       cursor: pointer;
       user-select: none;
       transition: border-color 0.15s, background 0.15s;
     }
-    .subject-row:hover {
-      border-color: var(--green-dim);
-    }
-    .subject-row.done {
-      background: #0f2d1a;
-      border-color: var(--green-2);
-    }
+    .subject-row:hover { border-color: var(--border2); background: var(--surface2); }
+    .subject-row.done { background: var(--ink); border-color: var(--ink); }
 
-    .subject-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .subject-info { display: flex; align-items: center; gap: 12px; }
     .subject-icon {
       width: 32px; height: 32px;
       border-radius: 8px;
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem;
       flex-shrink: 0;
     }
-    .subject-row.done .subject-icon {
-      background: #16432a;
-      border-color: var(--green-2);
-    }
+    .subject-row.done .subject-icon { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); }
+
     .subject-name {
       font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text);
+      font-weight: 800;
+      color: var(--ink);
     }
+    .subject-row.done .subject-name { color: #fff; }
     .subject-tag {
       font-size: 0.65rem;
-      color: var(--text-faint);
-      font-weight: 400;
+      color: var(--ink-faint);
+      font-weight: 700;
       margin-top: 1px;
     }
+    .subject-row.done .subject-tag { color: rgba(255,255,255,0.5); }
 
-    /* Toggle checkbox */
     .subject-check {
       width: 22px; height: 22px;
       border-radius: 6px;
-      border: 2px solid var(--border);
+      border: 2px solid var(--border2);
       background: transparent;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      transition: border-color 0.15s, background 0.15s;
     }
-    .subject-row.done .subject-check {
-      background: var(--green-2);
-      border-color: var(--green-2);
-    }
-    .subject-check svg {
-      opacity: 0;
-      transition: opacity 0.15s;
-    }
+    .subject-row.done .subject-check { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); }
+    .subject-check svg { opacity: 0; }
     .subject-row.done .subject-check svg { opacity: 1; }
 
-    /* Tracker footer */
     .tracker-footer {
       margin-top: 14px;
       display: flex;
@@ -353,12 +326,10 @@
     }
     .tracker-progress-text {
       font-size: 0.72rem;
-      color: var(--text-faint);
-    }
-    .tracker-progress-text span {
-      color: var(--green-1);
+      color: var(--ink-soft);
       font-weight: 700;
     }
+    .tracker-progress-text span { color: var(--ink); font-weight: 900; }
     .tracker-mini-bar-bg {
       flex: 1;
       max-width: 180px;
@@ -370,32 +341,17 @@
     }
     .tracker-mini-bar-fill {
       height: 100%;
-      background: var(--green-2);
+      background: var(--ink);
       border-radius: 50px;
       transition: width 0.3s ease;
     }
 
-    /* Subject chips (kept for visual reference — hidden now, replaced by tracker) */
-    .goals { display: none; }
-
-    /* Footer */
-    .footer {
-      font-size: 0.68rem;
-      color: var(--text-faint);
-      letter-spacing: 1px;
-    }
-    .footer strong { color: var(--text-muted); font-weight: 600; }
-
-    /* ── Timer button (fixed sidebar) ──────────────────────────── */
+    /* ── Timer FAB ─────────────────────────── */
     .timer-fab {
       position: fixed;
       right: 20px;
       top: 50%;
       transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
       z-index: 50;
     }
     .timer-fab a {
@@ -403,52 +359,45 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--ink);
       border-radius: 16px;
-      padding: 14px 10px;
+      padding: 16px 12px;
       text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
-      writing-mode: vertical-lr;
-      writing-mode: initial;
+      color: #fff;
+      transition: opacity 0.15s;
     }
-    .timer-fab a:hover {
-      border-color: var(--green-2);
-      color: var(--green-1);
-      background: var(--surface2);
-    }
+    .timer-fab a:hover { opacity: 0.85; }
     .timer-fab .fab-icon { font-size: 1.4rem; }
     .timer-fab .fab-label {
-      font-size: 0.6rem;
-      letter-spacing: 1.2px;
+      font-size: 0.58rem;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    /* ── Footer ────────────────────────────── */
+    .footer {
+      font-size: 0.7rem;
+      color: var(--ink-faint);
+      letter-spacing: 1px;
       font-weight: 700;
     }
+    .footer strong { color: var(--ink-soft); }
+
+    .goals { display: none; }
 
     @media (max-width: 900px) {
-      .timer-fab {
-        top: auto;
-        bottom: 20px;
-        right: 20px;
-        transform: none;
-        flex-direction: row;
-      }
+      .timer-fab { top: auto; bottom: 20px; transform: none; }
     }
-
     @media (max-width: 480px) {
       .unit { min-width: 76px; padding: 14px 8px 10px; }
-      .sep  { display: none; }
-      .total-days-banner { padding: 16px 28px; }
+      .sep { display: none; }
+      .total-days-banner { padding: 18px 30px; }
     }
   </style>
 </head>
 <body>
-<!-- Fixed Timer Button -->
+
 <div class="timer-fab">
   <a href="/timer.html">
     <span class="fab-icon">⏱</span>
@@ -518,7 +467,6 @@
 
   <div class="goals"></div>
 
-  <!-- ── Daily Study Tracker ──────────────────────────────────── -->
   <div class="tracker">
     <div class="tracker-header">
       <div>
@@ -545,11 +493,10 @@
         </div>
         <div class="subject-check">
           <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
-
       <div class="subject-row" data-subject="chemistry">
         <div class="subject-info">
           <div class="subject-icon">🧪</div>
@@ -560,11 +507,10 @@
         </div>
         <div class="subject-check">
           <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
-
       <div class="subject-row" data-subject="maths">
         <div class="subject-info">
           <div class="subject-icon">📐</div>
@@ -575,11 +521,10 @@
         </div>
         <div class="subject-check">
           <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
-
       <div class="subject-row" data-subject="hindi">
         <div class="subject-info">
           <div class="subject-icon">📖</div>
@@ -590,11 +535,10 @@
         </div>
         <div class="subject-check">
           <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
-
       <div class="subject-row" data-subject="english">
         <div class="subject-info">
           <div class="subject-icon">✍️</div>
@@ -605,7 +549,7 @@
         </div>
         <div class="subject-check">
           <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
@@ -630,192 +574,107 @@
   const quotes = [
     { text: "सपने वो नहीं जो नींद में आते हैं, सपने वो हैं जो नींद उड़ा देते हैं।", author: "Dr. A.P.J. Abdul Kalam" },
     { text: "कठिनाइयाँ इंसान को तोड़ने के लिए नहीं, बल्कि उसे और मज़बूत बनाने के लिए आती हैं।", author: "Swami Vivekananda" },
-    { text: "आज की मेहनत, कल की सफलता की नींव है। एक-एक दिन बोता जा, फसल ज़रूर आएगी।", author: "— आगे बढ़ता जा" },
-    { text: "जो अपनी मंज़िल के लिए रोज़ उठता है, वो एक दिन पहुँच ही जाता है।", author: "— हर टॉपर की कहानी" },
+    { text: "आज की मेहनत, कल की सफलता की नींव है। एक-एक दिन बोता जा, फसल ज़रूर आएगी।", author: "आगे बढ़ता जा" },
+    { text: "जो अपनी मंज़िल के लिए रोज़ उठता है, वो एक दिन पहुँच ही जाता है।", author: "हर टॉपर की कहानी" },
     { text: "उठ, जाग, और तब तक मत रुक जब तक लक्ष्य प्राप्त न हो जाए।", author: "Swami Vivekananda" },
-    { text: "Bihar की मिट्टी में वो ताकत है जो IAS, IIT, NEET सबको जन्म देती है — तू भी उसी मिट्टी का है।", author: "— अपने आप पर भरोसा रख" },
-    { text: "Distraction एक दिन है, Regret एक ज़िंदगी है। आज का एक घंटा कल की दिशा बदल सकता है।", author: "— Focus करना सीख" },
-    { text: "तेरी मेहनत देख रहा है वो परिवार, जो चुप रहकर सब सहता है तेरे सपने के लिए।", author: "— उनके लिए भी पढ़" },
+    { text: "Bihar की मिट्टी में वो ताकत है जो IAS, IIT, NEET सबको जन्म देती है — तू भी उसी मिट्टी का है।", author: "अपने आप पर भरोसा रख" },
+    { text: "Distraction एक दिन है, Regret एक ज़िंदगी है। आज का एक घंटा कल की दिशा बदल सकता है।", author: "Focus करना सीख" },
+    { text: "तेरी मेहनत देख रहा है वो परिवार, जो चुप रहकर सब सहता है तेरे सपने के लिए।", author: "उनके लिए भी पढ़" },
   ];
-
   let qIndex = Math.floor(Math.random() * quotes.length);
-  const qText   = document.getElementById('quote-text');
+  const qText = document.getElementById('quote-text');
   const qAuthor = document.getElementById('quote-author');
-
   function showQuote(q) {
-    qText.style.opacity   = 0;
-    qAuthor.style.opacity = 0;
+    qText.style.opacity = 0; qAuthor.style.opacity = 0;
     setTimeout(() => {
-      qText.textContent   = q.text;
+      qText.textContent = q.text;
       qAuthor.textContent = '— ' + q.author;
-      qText.style.opacity   = 1;
-      qAuthor.style.opacity = 1;
+      qText.style.opacity = 1; qAuthor.style.opacity = 1;
     }, 400);
   }
   showQuote(quotes[qIndex]);
-  setInterval(() => {
-    qIndex = (qIndex + 1) % quotes.length;
-    showQuote(quotes[qIndex]);
-  }, 8000);
+  setInterval(() => { qIndex = (qIndex + 1) % quotes.length; showQuote(quotes[qIndex]); }, 8000);
 
   // ── Countdown ─────────────────────────────────────────────────
   const EXAM_DATE  = new Date('2027-01-01T00:00:00');
   const START_DATE = new Date('2024-05-22T00:00:00');
   const TOTAL_MS   = EXAM_DATE - START_DATE;
-
   function pad(n) { return String(n).padStart(2, '0'); }
-
   function update() {
     const now  = new Date();
     const diff = EXAM_DATE - now;
-
     if (diff <= 0) {
-      ['years','months','days','hours','minutes','seconds'].forEach(id => {
-        document.getElementById(id).textContent = '00';
-      });
+      ['years','months','days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
       document.getElementById('totalDays').textContent = '0';
       document.getElementById('bar').style.width = '100%';
       document.getElementById('pct').textContent = '100%';
       return;
     }
-
-    const examD = new Date(EXAM_DATE);
-    const nowD  = new Date(now);
-
-    let yrs  = examD.getFullYear() - nowD.getFullYear();
-    let mons = examD.getMonth()    - nowD.getMonth();
-    let dys  = examD.getDate()     - nowD.getDate();
-
-    if (dys < 0) {
-      mons--;
-      const prev = new Date(examD.getFullYear(), examD.getMonth(), 0);
-      dys += prev.getDate();
-    }
+    const examD = new Date(EXAM_DATE), nowD = new Date(now);
+    let yrs = examD.getFullYear() - nowD.getFullYear();
+    let mons = examD.getMonth() - nowD.getMonth();
+    let dys = examD.getDate() - nowD.getDate();
+    if (dys < 0) { mons--; dys += new Date(examD.getFullYear(), examD.getMonth(), 0).getDate(); }
     if (mons < 0) { yrs--; mons += 12; }
-
-    const remMs = diff % (1000 * 60 * 60 * 24);
-    const hrs   = Math.floor(remMs / (1000 * 60 * 60));
-    const mins  = Math.floor((remMs % (1000 * 60 * 60)) / (1000 * 60));
-    const secs  = Math.floor((remMs % (1000 * 60)) / 1000);
-
+    const remMs = diff % (1000*60*60*24);
+    const hrs = Math.floor(remMs/(1000*60*60));
+    const mins = Math.floor((remMs%(1000*60*60))/(1000*60));
+    const secs = Math.floor((remMs%(1000*60))/1000);
     document.getElementById('years').textContent   = pad(yrs);
     document.getElementById('months').textContent  = pad(mons);
     document.getElementById('days').textContent    = pad(dys);
     document.getElementById('hours').textContent   = pad(hrs);
     document.getElementById('minutes').textContent = pad(mins);
     document.getElementById('seconds').textContent = pad(secs);
-
-    const totalDaysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    document.getElementById('totalDays').textContent = totalDaysLeft.toLocaleString('en-IN');
-
-    const elapsed = now - START_DATE;
-    const pct     = Math.min((elapsed / TOTAL_MS) * 100, 100).toFixed(2);
+    document.getElementById('totalDays').textContent = Math.ceil(diff/(1000*60*60*24)).toLocaleString('en-IN');
+    const pct = Math.min(((now - START_DATE)/TOTAL_MS)*100,100).toFixed(2);
     document.getElementById('bar').style.width = pct + '%';
     document.getElementById('pct').textContent = pct + '%';
   }
-
-  update();
-  setInterval(update, 1000);
+  update(); setInterval(update, 1000);
 
   // ── Study Tracker ─────────────────────────────────────────────
-  const SUBJECTS = ['physics', 'chemistry', 'maths', 'hindi', 'english'];
+  const SUBJECTS = ['physics','chemistry','maths','hindi','english'];
   const STORAGE_KEY = 'biharBoardStudyLog';
-
-  function todayStr() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  }
-
-  function dateStrOf(daysAgo) {
-    const d = new Date();
-    d.setDate(d.getDate() - daysAgo);
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  }
-
-  function loadLog() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-    catch(e) { return {}; }
-  }
-
-  function saveLog(log) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(log));
-  }
-
-  function wasStudiedOn(log, dateStr) {
-    const day = log[dateStr];
-    if (!day) return false;
-    return SUBJECTS.some(s => day[s]);
-  }
-
+  function todayStr() { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+  function dateStrOf(n) { const d=new Date(); d.setDate(d.getDate()-n); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+  function loadLog() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}; } catch(e){ return {}; } }
+  function saveLog(l) { localStorage.setItem(STORAGE_KEY, JSON.stringify(l)); }
+  function wasStudiedOn(log,ds) { const d=log[ds]; return d && SUBJECTS.some(s=>d[s]); }
   function calcStreak(log) {
-    const today = todayStr();
-    let streak = 0;
-    // If at least one subject done today, count today
-    if (wasStudiedOn(log, today)) {
-      streak = 1;
-      let i = 1;
-      while (wasStudiedOn(log, dateStrOf(i))) { streak++; i++; }
-    } else {
-      // Check if yesterday was done (streak from yesterday backwards)
-      let i = 1;
-      while (wasStudiedOn(log, dateStrOf(i))) { streak++; i++; }
-    }
-    return streak;
+    const today=todayStr(); let s=0;
+    if (wasStudiedOn(log,today)) { s=1; let i=1; while(wasStudiedOn(log,dateStrOf(i))){ s++; i++; } }
+    else { let i=1; while(wasStudiedOn(log,dateStrOf(i))){ s++; i++; } }
+    return s;
   }
-
   function renderTracker() {
-    const log   = loadLog();
-    const today = todayStr();
-    const entry = log[today] || {};
-
-    // Display date in friendly format
-    const d = new Date();
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    document.getElementById('trackerDate').textContent =
-      `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-
-    // Render each subject row
-    let doneCount = 0;
-    SUBJECTS.forEach(sub => {
-      const row = document.querySelector(`.subject-row[data-subject="${sub}"]`);
-      if (!row) return;
-      if (entry[sub]) { row.classList.add('done'); doneCount++; }
-      else             { row.classList.remove('done'); }
+    const log=loadLog(), today=todayStr(), entry=log[today]||{};
+    const d=new Date();
+    const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    document.getElementById('trackerDate').textContent=`${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    let done=0;
+    SUBJECTS.forEach(sub=>{
+      const row=document.querySelector(`.subject-row[data-subject="${sub}"]`);
+      if(!row) return;
+      if(entry[sub]){ row.classList.add('done'); done++; } else { row.classList.remove('done'); }
     });
-
-    // Mini progress bar
-    const pct = Math.round((doneCount / SUBJECTS.length) * 100);
-    document.getElementById('doneCount').textContent     = doneCount;
-    document.getElementById('trackerBar').style.width   = pct + '%';
-
-    // Streak
-    document.getElementById('streakCount').textContent = calcStreak(log);
+    document.getElementById('doneCount').textContent=done;
+    document.getElementById('trackerBar').style.width=Math.round((done/SUBJECTS.length)*100)+'%';
+    document.getElementById('streakCount').textContent=calcStreak(log);
   }
-
-  function toggleSubject(subject) {
-    const log   = loadLog();
-    const today = todayStr();
-    if (!log[today]) log[today] = {};
-    log[today][subject] = !log[today][subject];
-    saveLog(log);
-    renderTracker();
+  function toggleSubject(sub) {
+    const log=loadLog(), today=todayStr();
+    if(!log[today]) log[today]={};
+    log[today][sub]=!log[today][sub];
+    saveLog(log); renderTracker();
   }
-
-  // Attach click handlers
-  document.querySelectorAll('.subject-row').forEach(row => {
-    row.addEventListener('click', () => toggleSubject(row.dataset.subject));
-  });
-
-  // Auto re-render at midnight (date change)
+  document.querySelectorAll('.subject-row').forEach(r=>r.addEventListener('click',()=>toggleSubject(r.dataset.subject)));
   function scheduleMidnightReset() {
-    const now  = new Date();
-    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 0, 0, 5);
-    setTimeout(() => { renderTracker(); scheduleMidnightReset(); }, next - now);
+    const now=new Date(), next=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,5);
+    setTimeout(()=>{ renderTracker(); scheduleMidnightReset(); }, next-now);
   }
-
-  renderTracker();
-  scheduleMidnightReset();
+  renderTracker(); scheduleMidnightReset();
 </script>
 </body>
 </html>
