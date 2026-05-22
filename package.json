@@ -1,4 +1,15 @@
 {
+  "name": "mera-lakshya-bihar-board-2027",
+  "version": "1.0.0",
+  "description": "Personal study dashboard for Rupesh — Bihar Board 2027",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev":   "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "web-push": "^3.6.7"
   }
