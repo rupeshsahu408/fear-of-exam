@@ -96,12 +96,14 @@
       content: '';
       position: fixed;
       inset: 0;
-      background: url('/public/saraswati_final.png') center 18% / cover no-repeat;
+      background: url('/public/saraswati_final.png') center center / auto 100% no-repeat;
+      background-color: #d4b896;
       z-index: 0;
       pointer-events: none;
       animation: bgGlow 5s ease-in-out infinite;
     }
     [data-theme="dark"] body::before {
+      background-color: #2a1f14;
       animation: bgGlowDark 5s ease-in-out infinite;
     }
 
