@@ -70,6 +70,17 @@
     }
     .theme-toggle:hover { border-color: var(--border2); color: var(--ink); }
 
+    @keyframes bgGlow {
+      0%   { opacity: 0.42; filter: saturate(1.2) contrast(1.08) brightness(1.04) drop-shadow(0 0 60px rgba(218,165,32,0.18)); }
+      50%  { opacity: 0.52; filter: saturate(1.35) contrast(1.14) brightness(1.10) drop-shadow(0 0 120px rgba(218,165,32,0.32)); }
+      100% { opacity: 0.42; filter: saturate(1.2) contrast(1.08) brightness(1.04) drop-shadow(0 0 60px rgba(218,165,32,0.18)); }
+    }
+    @keyframes bgGlowDark {
+      0%   { opacity: 0.50; filter: saturate(1.5) contrast(1.18) brightness(1.25) drop-shadow(0 0 60px rgba(218,165,32,0.25)); }
+      50%  { opacity: 0.62; filter: saturate(1.7) contrast(1.24) brightness(1.38) drop-shadow(0 0 130px rgba(218,165,32,0.45)); }
+      100% { opacity: 0.50; filter: saturate(1.5) contrast(1.18) brightness(1.25) drop-shadow(0 0 60px rgba(218,165,32,0.25)); }
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
@@ -79,6 +90,20 @@
       flex-direction: column;
       align-items: center;
       padding: 32px 16px 56px;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url('/public/saraswati_final.png') center center / cover no-repeat;
+      z-index: 0;
+      pointer-events: none;
+      animation: bgGlow 5s ease-in-out infinite;
+    }
+    [data-theme="dark"] body::before {
+      mix-blend-mode: screen;
+      animation: bgGlowDark 5s ease-in-out infinite;
     }
 
     /* ── Top nav ─────────────────────────────── */
@@ -89,6 +114,8 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
     }
     .back-btn {
       display: flex;
@@ -122,6 +149,8 @@
       border-radius: 20px;
       padding: 28px 28px 32px;
       margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
     }
 
     /* ── Mode tabs ───────────────────────────── */
@@ -399,75 +428,14 @@
       cursor: pointer;
     }
 
-    /* ── Saraswati figure ─────────────────────── */
-    @keyframes shimmerText {
-      0%   { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-    @keyframes fadeUpDown {
-      0%, 100% { opacity: 0.7; transform: translateY(0); }
-      50%       { opacity: 1;   transform: translateY(-4px); }
-    }
-    .jai-saraswati {
-      position: fixed;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 11;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      background: linear-gradient(90deg, #b8860b 0%, #ffd700 30%, #fffacd 50%, #ffd700 70%, #b8860b 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmerText 2.5s linear infinite, fadeUpDown 4s ease-in-out infinite;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-
-    @keyframes saraGlow {
-      0%   { filter: drop-shadow(0 0 18px rgba(218,165,32,0.45)) drop-shadow(0 0 50px rgba(255,200,50,0.18)) brightness(1.06); opacity: 0.82; }
-      50%  { filter: drop-shadow(0 0 52px rgba(218,165,32,0.85)) drop-shadow(0 0 110px rgba(255,200,50,0.35)) brightness(1.15); opacity: 1; }
-      100% { filter: drop-shadow(0 0 18px rgba(218,165,32,0.45)) drop-shadow(0 0 50px rgba(255,200,50,0.18)) brightness(1.06); opacity: 0.82; }
-    }
-    .saraswati-figure {
-      position: fixed;
-      bottom: 0;
-      width: 220px;
-      z-index: 10;
-      pointer-events: none;
-      animation: saraGlow 4s ease-in-out infinite;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .saraswati-left  { left: 0; border-radius: 0 12px 0 0; }
-    .saraswati-right { right: 0; border-radius: 12px 0 0 0; }
-    .saraswati-figure img {
-      width: 100%;
-      height: auto;
-      display: block;
-      opacity: 0.92;
-    }
-    @media (max-width: 1100px) {
-      .saraswati-figure { width: 160px; }
-    }
-    @media (max-width: 900px) {
-      .saraswati-figure { width: 120px; }
-    }
-    @media (max-width: 600px) {
-      .saraswati-figure { width: 80px; }
-    }
-
     /* ── Tips card ────────────────────────────── */
     .tips-card {
       width: 100%;
       max-width: 680px;
       background: var(--surface);
       border: 1.5px solid var(--border);
+      position: relative;
+      z-index: 1;
       border-left: 4px solid var(--ink);
       border-radius: 14px;
       padding: 16px 20px;
@@ -490,13 +458,6 @@
   </style>
 </head>
 <body>
-
-  <div class="saraswati-figure saraswati-left">
-    <img src="/public/saraswati_final.png" alt="Maa Saraswati"/>
-  </div>
-  <div class="saraswati-figure saraswati-right">
-    <img src="/public/saraswati_final.png" alt="Maa Saraswati"/>
-  </div>
 
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
     <span id="themeIcon">🌙</span>
