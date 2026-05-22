@@ -29,10 +29,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       background: var(--bg);
       color: var(--text);
-      padding: 32px 16px;
+      padding: 40px 16px 48px;
     }
 
     .container {
@@ -206,32 +206,177 @@
       transition: opacity 0.6s;
     }
 
-    /* Subject chips */
-    .goals {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    .goal-chip {
-      display: flex;
-      align-items: center;
-      gap: 7px;
+    /* ── Study Tracker ────────────────────────────────────────── */
+    .tracker {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 6px 14px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 500;
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+      text-align: left;
     }
-    .goal-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green-1);
+
+    .tracker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .tracker-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+    .tracker-date {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    /* Streak badge */
+    .streak-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 6px 16px;
       flex-shrink: 0;
     }
+    .streak-fire { font-size: 1rem; }
+    .streak-count {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--green-1);
+      line-height: 1;
+    }
+    .streak-label {
+      font-size: 0.65rem;
+      color: var(--text-faint);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    /* Subject rows */
+    .subject-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .subject-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .subject-row:hover {
+      border-color: var(--green-dim);
+    }
+    .subject-row.done {
+      background: #0f2d1a;
+      border-color: var(--green-2);
+    }
+
+    .subject-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subject-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .subject-row.done .subject-icon {
+      background: #16432a;
+      border-color: var(--green-2);
+    }
+    .subject-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .subject-tag {
+      font-size: 0.65rem;
+      color: var(--text-faint);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    /* Toggle checkbox */
+    .subject-check {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .subject-row.done .subject-check {
+      background: var(--green-2);
+      border-color: var(--green-2);
+    }
+    .subject-check svg {
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .subject-row.done .subject-check svg { opacity: 1; }
+
+    /* Tracker footer */
+    .tracker-footer {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tracker-progress-text {
+      font-size: 0.72rem;
+      color: var(--text-faint);
+    }
+    .tracker-progress-text span {
+      color: var(--green-1);
+      font-weight: 700;
+    }
+    .tracker-mini-bar-bg {
+      flex: 1;
+      max-width: 180px;
+      height: 5px;
+      background: var(--surface2);
+      border-radius: 50px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .tracker-mini-bar-fill {
+      height: 100%;
+      background: var(--green-2);
+      border-radius: 50px;
+      transition: width 0.3s ease;
+    }
+
+    /* Subject chips (kept for visual reference — hidden now, replaced by tracker) */
+    .goals { display: none; }
 
     /* Footer */
     .footer {
@@ -309,12 +454,109 @@
     <p class="quote-author" id="quote-author">— Dr. A.P.J. Abdul Kalam</p>
   </div>
 
-  <div class="goals">
-    <div class="goal-chip"><div class="goal-dot"></div>Physics</div>
-    <div class="goal-chip"><div class="goal-dot"></div>Chemistry</div>
-    <div class="goal-chip"><div class="goal-dot"></div>Mathematics</div>
-    <div class="goal-chip"><div class="goal-dot"></div>Hindi</div>
-    <div class="goal-chip"><div class="goal-dot"></div>English</div>
+  <div class="goals"></div>
+
+  <!-- ── Daily Study Tracker ──────────────────────────────────── -->
+  <div class="tracker">
+    <div class="tracker-header">
+      <div>
+        <div class="tracker-title">आज का अध्ययन — Today's Study</div>
+        <div class="tracker-date" id="trackerDate">—</div>
+      </div>
+      <div class="streak-badge">
+        <span class="streak-fire">🔥</span>
+        <div>
+          <div class="streak-count" id="streakCount">0</div>
+          <div class="streak-label">Day Streak</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-list" id="subjectList">
+      <div class="subject-row" data-subject="physics">
+        <div class="subject-info">
+          <div class="subject-icon">⚛️</div>
+          <div>
+            <div class="subject-name">Physics</div>
+            <div class="subject-tag">भौतिक विज्ञान</div>
+          </div>
+        </div>
+        <div class="subject-check">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="subject-row" data-subject="chemistry">
+        <div class="subject-info">
+          <div class="subject-icon">🧪</div>
+          <div>
+            <div class="subject-name">Chemistry</div>
+            <div class="subject-tag">रसायन विज्ञान</div>
+          </div>
+        </div>
+        <div class="subject-check">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="subject-row" data-subject="maths">
+        <div class="subject-info">
+          <div class="subject-icon">📐</div>
+          <div>
+            <div class="subject-name">Mathematics</div>
+            <div class="subject-tag">गणित</div>
+          </div>
+        </div>
+        <div class="subject-check">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="subject-row" data-subject="hindi">
+        <div class="subject-info">
+          <div class="subject-icon">📖</div>
+          <div>
+            <div class="subject-name">Hindi</div>
+            <div class="subject-tag">हिन्दी</div>
+          </div>
+        </div>
+        <div class="subject-check">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="subject-row" data-subject="english">
+        <div class="subject-info">
+          <div class="subject-icon">✍️</div>
+          <div>
+            <div class="subject-name">English</div>
+            <div class="subject-tag">अंग्रेज़ी</div>
+          </div>
+        </div>
+        <div class="subject-check">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1 5L5 9L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="tracker-footer">
+      <div class="tracker-progress-text">
+        आज पढ़ा: <span id="doneCount">0</span> / 5 subjects
+      </div>
+      <div class="tracker-mini-bar-bg">
+        <div class="tracker-mini-bar-fill" id="trackerBar" style="width:0%"></div>
+      </div>
+    </div>
   </div>
 
   <p class="footer">Target: <strong>1 January 2027</strong> &nbsp;·&nbsp; Bihar Board Exam Begins</p>
@@ -412,6 +654,106 @@
 
   update();
   setInterval(update, 1000);
+
+  // ── Study Tracker ─────────────────────────────────────────────
+  const SUBJECTS = ['physics', 'chemistry', 'maths', 'hindi', 'english'];
+  const STORAGE_KEY = 'biharBoardStudyLog';
+
+  function todayStr() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function dateStrOf(daysAgo) {
+    const d = new Date();
+    d.setDate(d.getDate() - daysAgo);
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function loadLog() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch(e) { return {}; }
+  }
+
+  function saveLog(log) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(log));
+  }
+
+  function wasStudiedOn(log, dateStr) {
+    const day = log[dateStr];
+    if (!day) return false;
+    return SUBJECTS.some(s => day[s]);
+  }
+
+  function calcStreak(log) {
+    const today = todayStr();
+    let streak = 0;
+    // If at least one subject done today, count today
+    if (wasStudiedOn(log, today)) {
+      streak = 1;
+      let i = 1;
+      while (wasStudiedOn(log, dateStrOf(i))) { streak++; i++; }
+    } else {
+      // Check if yesterday was done (streak from yesterday backwards)
+      let i = 1;
+      while (wasStudiedOn(log, dateStrOf(i))) { streak++; i++; }
+    }
+    return streak;
+  }
+
+  function renderTracker() {
+    const log   = loadLog();
+    const today = todayStr();
+    const entry = log[today] || {};
+
+    // Display date in friendly format
+    const d = new Date();
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    document.getElementById('trackerDate').textContent =
+      `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+
+    // Render each subject row
+    let doneCount = 0;
+    SUBJECTS.forEach(sub => {
+      const row = document.querySelector(`.subject-row[data-subject="${sub}"]`);
+      if (!row) return;
+      if (entry[sub]) { row.classList.add('done'); doneCount++; }
+      else             { row.classList.remove('done'); }
+    });
+
+    // Mini progress bar
+    const pct = Math.round((doneCount / SUBJECTS.length) * 100);
+    document.getElementById('doneCount').textContent     = doneCount;
+    document.getElementById('trackerBar').style.width   = pct + '%';
+
+    // Streak
+    document.getElementById('streakCount').textContent = calcStreak(log);
+  }
+
+  function toggleSubject(subject) {
+    const log   = loadLog();
+    const today = todayStr();
+    if (!log[today]) log[today] = {};
+    log[today][subject] = !log[today][subject];
+    saveLog(log);
+    renderTracker();
+  }
+
+  // Attach click handlers
+  document.querySelectorAll('.subject-row').forEach(row => {
+    row.addEventListener('click', () => toggleSubject(row.dataset.subject));
+  });
+
+  // Auto re-render at midnight (date change)
+  function scheduleMidnightReset() {
+    const now  = new Date();
+    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 0, 0, 5);
+    setTimeout(() => { renderTracker(); scheduleMidnightReset(); }, next - now);
+  }
+
+  renderTracker();
+  scheduleMidnightReset();
 </script>
 </body>
 </html>
