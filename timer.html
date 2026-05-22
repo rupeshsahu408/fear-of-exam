@@ -407,13 +407,15 @@
     }
     .saraswati-figure {
       position: fixed;
-      left: 0;
       bottom: 0;
       width: 210px;
       z-index: 10;
       pointer-events: none;
       animation: saraGlow 4s ease-in-out infinite;
     }
+    .saraswati-left  { left: 0; }
+    .saraswati-right { right: 0; }
+    .saraswati-right img { transform: scaleX(-1); }
     .saraswati-figure img {
       width: 100%;
       height: auto;
@@ -423,7 +425,7 @@
       .saraswati-figure { width: 130px; }
     }
     @media (max-width: 600px) {
-      .saraswati-figure { width: 90px; }
+      .saraswati-figure { width: 80px; }
     }
 
     /* ── Tips card ────────────────────────────── */
@@ -455,7 +457,10 @@
 </head>
 <body>
 
-  <div class="saraswati-figure">
+  <div class="saraswati-figure saraswati-left">
+    <img src="/public/saraswati_transparent.png" alt="Maa Saraswati"/>
+  </div>
+  <div class="saraswati-figure saraswati-right">
     <img src="/public/saraswati_transparent.png" alt="Maa Saraswati"/>
   </div>
 
