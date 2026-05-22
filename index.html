@@ -616,6 +616,145 @@
       pointer-events: none;
       white-space: nowrap;
     }
+    /* ── Welcome Popup ───────────────────────── */
+    @keyframes popupFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes popupSlideUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+    @keyframes quoteAppear {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.60);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: popupFadeIn 0.4s ease;
+    }
+    .popup-overlay.hiding {
+      animation: popupFadeIn 0.35s ease reverse forwards;
+    }
+    .popup-card {
+      width: 100%;
+      max-width: 440px;
+      background: #faf6f1;
+      border: 1.5px solid rgba(218,165,32,0.35);
+      border-radius: 28px;
+      overflow: hidden;
+      animation: popupSlideUp 0.5s cubic-bezier(0.34,1.56,0.64,1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.40);
+    }
+    [data-theme="dark"] .popup-card {
+      background: #1e1e1e;
+      border-color: rgba(218,165,32,0.25);
+    }
+    .popup-image-wrap {
+      width: 100%;
+      height: 260px;
+      overflow: hidden;
+      position: relative;
+    }
+    .popup-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+    }
+    .popup-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.35) 100%);
+    }
+    .popup-gold-strip {
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(218,165,32,0.5) 20%,
+        rgba(255,215,0,0.9) 50%,
+        rgba(218,165,32,0.5) 80%,
+        transparent 100%);
+    }
+    .popup-body {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 18px;
+    }
+    .popup-jai {
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #b8860b;
+      background: rgba(218,165,32,0.12);
+      border: 1px solid rgba(218,165,32,0.30);
+      border-radius: 50px;
+      padding: 5px 16px;
+    }
+    [data-theme="dark"] .popup-jai { color: #f5c842; }
+    .popup-quote-wrap {
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .popup-quote {
+      font-size: clamp(0.95rem, 2.5vw, 1.08rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.75;
+      font-style: italic;
+      animation: quoteAppear 0.6s ease;
+    }
+    .popup-divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(218,165,32,0.7), transparent);
+      border-radius: 2px;
+    }
+    .popup-question {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: 0.3px;
+    }
+    .popup-btn {
+      width: 100%;
+      background: #1a1a1a;
+      color: #faf6f1;
+      border: none;
+      border-radius: 14px;
+      padding: 16px 24px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    [data-theme="dark"] .popup-btn {
+      background: #faf6f1;
+      color: #1a1a1a;
+    }
+    .popup-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .popup-btn:active { transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -633,6 +772,26 @@
     <span class="fab-icon">⏱</span>
     <span class="fab-label">Timer</span>
   </a>
+</div>
+
+<!-- ── Welcome Popup ─────────────────────────────────── -->
+<div class="popup-overlay" id="welcomePopup" style="display:none;">
+  <div class="popup-card">
+    <div class="popup-image-wrap">
+      <img src="/public/saraswati_landscape.png" alt="Maa Saraswati" />
+      <div class="popup-image-overlay"></div>
+    </div>
+    <div class="popup-gold-strip"></div>
+    <div class="popup-body">
+      <div class="popup-jai">🪷 जय माँ सरस्वती 🪷</div>
+      <div class="popup-quote-wrap">
+        <div class="popup-quote" id="popupQuoteText"></div>
+        <div class="popup-divider"></div>
+      </div>
+      <div class="popup-question">क्या तुम तैयार हो?</div>
+      <button class="popup-btn" id="popupReadyBtn">हाँ, मैं तैयार हूँ 🙏</button>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -970,6 +1129,149 @@
     setTimeout(()=>{ renderTracker(); scheduleMidnightReset(); }, next-now);
   }
   renderTracker(); scheduleMidnightReset();
+
+  // ── Welcome Popup ──────────────────────────────────────────────
+  const POPUP_QUOTES = [
+    "मंज़िल उन्हीं को मिलती है जो थककर भी चलते रहते हैं।",
+    "पढ़ाई वो चाबी है जो किसी भी दरवाज़े को खोल सकती है।",
+    "आज की मेहनत कल की पहचान बनेगी।",
+    "सपने वो नहीं जो नींद में आएं, सपने वो हैं जो नींद न आने दें।",
+    "अपने लक्ष्य पर ध्यान रखो, रास्ते खुद बन जाएंगे।",
+    "एक किताब एक हज़ार दरवाज़े खोल सकती है।",
+    "कठिनाई वहीं है जहाँ कमज़ोर रुकते हैं और मज़बूत शुरू करते हैं।",
+    "जो आज पसीना बहाएगा, वो कल मुस्कुराएगा।",
+    "सफलता कोई दुर्घटना नहीं — यह मेहनत, लगन और सीखने का परिणाम है।",
+    "हर दिन एक नया मौका है, इसे व्यर्थ मत जाने दो।",
+    "तुम्हारी ताकत तुम्हारे भीतर है — बस उसे जगाना है।",
+    "हार तब होती है जब तुम कोशिश करना छोड़ देते हो।",
+    "एक-एक कदम मिलकर ही लंबी मंज़िल तय होती है।",
+    "पढ़ोगे तो बढ़ोगे, रुकोगे तो चूक जाओगे।",
+    "खुद पर भरोसा रखो — तुम उससे कहीं ज़्यादा काबिल हो जितना तुम सोचते हो।",
+    "जो सोचते हो वो बनते हो — इसलिए बड़ा सोचो।",
+    "असफलता अंत नहीं, यह एक नई शुरुआत का संकेत है।",
+    "जितना गहरा पढ़ोगे, उतना ऊँचा उड़ोगे।",
+    "वक्त हमेशा नहीं रहता — आज जो करना है वो आज करो।",
+    "माँ सरस्वती की कृपा उन पर होती है जो विद्या को सच्चे मन से चाहते हैं।",
+    "कमज़ोर वो नहीं जो गिरे, बल्कि वो जो उठने की कोशिश न करे।",
+    "मेहनत का कोई शॉर्टकट नहीं होता — सीधा रास्ता ही सबसे तेज़ होता है।",
+    "ज्ञान वो दीपक है जो हर अँधेरे को मिटा देता है।",
+    "आज तुम जो बीज बोते हो, कल वही फल बनता है।",
+    "हर सुबह एक नई उम्मीद लेकर आती है — उसे ज़ाया मत करो।",
+    "परीक्षा से डरो मत, परीक्षा तुमसे डरे।",
+    "अनुशासन वो पुल है जो सपने को हकीकत से जोड़ता है।",
+    "दूसरों की राय से नहीं, अपने इरादे से चलो।",
+    "छोटी-छोटी जीतें मिलकर बड़ी सफलता बनाती हैं।",
+    "रात में जो पढ़ता है, सुबह वो चमकता है।",
+    "मुश्किल रास्ते ही मज़बूत मंज़िलें देते हैं।",
+    "तुम्हारी मेहनत तुम्हारी पहचान है — इसे कभी छोड़ मत।",
+    "हर महान व्यक्ति कभी न कभी संघर्ष से गुज़रा है।",
+    "ध्यान से पढ़ो, समझ से लिखो — परिणाम खुद ही अच्छा होगा।",
+    "जो आज कठिन लगता है, कल वही आसान बन जाएगा।",
+    "ज़िद हो तो सफलता की, नाकामी की नहीं।",
+    "सच्ची लगन से की गई मेहनत कभी बेकार नहीं जाती।",
+    "तुम्हारे हाथ में है अपनी कहानी लिखना — अभी लिखना शुरू करो।",
+    "पूछना कमज़ोरी नहीं, सीखना ताकत है।",
+    "एक घंटे की गहरी पढ़ाई दस घंटे की सतही पढ़ाई से बेहतर है।",
+    "जो दूसरों को देख के रुकते हैं, वो कभी आगे नहीं बढ़ते।",
+    "तुम्हारा भविष्य आज तुम्हारे फैसलों पर निर्भर करता है।",
+    "हिम्मत रखो — हर तूफान के बाद शांति आती है।",
+    "सफलता का स्वाद तभी मीठा होता है जब मेहनत कड़वी हो।",
+    "विद्या से बड़ा कोई धन नहीं और अज्ञान से बड़ी कोई गरीबी नहीं।",
+    "अपना लक्ष्य इतना बड़ा रखो कि थकान को समय ही न मिले।",
+    "आत्मविश्वास वो हथियार है जो हर मुश्किल को आसान बना देता है।",
+    "पढ़ाई में जो डूबता है, सफलता में वो उभरता है।",
+    "हर रात सोने से पहले खुद से पूछो — क्या आज मैंने अपना सर्वश्रेष्ठ दिया?",
+    "जो संघर्ष करता है वो चमकता है — जो रुकता है वो गुम हो जाता है।",
+    "माँ की दुआ और अपनी मेहनत — यही दोनों काफी हैं।",
+    "ज्ञान वो चीज़ है जो न चोरी होती है, न खर्च होती है।",
+    "सोचो मत कि यह होगा या नहीं — बस करो।",
+    "जितना तुम पढ़ोगे, उतना तुम्हारी दुनिया बड़ी होगी।",
+    "कठिन समय में घबराओ नहीं — यही वो वक्त है जब असली ताकत दिखती है।",
+    "जीत के लिए जन्मे हो तुम — यह बात याद रखो।",
+    "कल की चिंता छोड़ो, आज को पूरे दिल से जियो।",
+    "हर गलती एक सबक है — उसे फेंको मत, सीखो।",
+    "अपनी तुलना किसी और से मत करो — तुम्हारी अपनी यात्रा है।",
+    "विश्वास, मेहनत और धैर्य — यही तीन सफलता के मंत्र हैं।",
+    "तुम जो बनना चाहते हो, उसकी नींव आज रखी जाती है।",
+    "Physics हो या Maths — हर सवाल का जवाब है, बस ढूंढना पड़ता है।",
+    "जो हर बाधा को अवसर समझे, वही सच्चा विजेता है।",
+    "तुम्हारे इरादे मज़बूत हों तो रास्ते खुद मिल जाते हैं।",
+    "पढ़ाई का हर पल एक निवेश है जिसका ब्याज ज़िंदगी भर मिलता है।",
+    "असंभव शब्द उन लोगों की शब्दावली में होता है जिन्होंने कभी कोशिश नहीं की।",
+    "शुरुआत करना ही सबसे बड़ी हिम्मत है।",
+    "रोज़ थोड़ा-थोड़ा सुधरो — एक दिन तुम देखोगे कितना आगे निकल आए हो।",
+    "माँ सरस्वती उन्हें आशीर्वाद देती हैं जो ज्ञान को सच्चे दिल से खोजते हैं।",
+    "सफलता की कोई उम्र नहीं — पर शुरुआत जितनी जल्दी हो उतना अच्छा।",
+    "जब थक जाओ तो रुको, लेकिन छोड़ो मत।",
+    "हर बड़े काम की शुरुआत एक छोटे कदम से होती है।",
+    "खुद पर इतना यकीन रखो कि परिस्थितियाँ तुम्हारे सामने झुकें।",
+    "जो आज का काम आज करता है, वो कल का राजा होता है।",
+    "पूरी मेहनत के साथ पढ़ो — परिणाम तुम्हारे इंतज़ार में है।",
+    "Chemistry हो या Physics — हर formula एक दरवाज़ा है नई दुनिया का।",
+    "तुम सिर्फ एक छात्र नहीं — तुम अपने परिवार का सपना हो।",
+    "जो गिरकर भी मुस्कुराए, वही असली योद्धा है।",
+    "लक्ष्य बड़ा रखो, मेहनत कठोर रखो, और विश्वास अटल रखो।",
+    "Bihar की माटी ने दुनिया को ज्ञानी दिए हैं — तुम भी उस परंपरा के हिस्से हो।",
+    "हर सुबह एक नई परीक्षा है — और तुम हर बार पास होने के लिए बने हो।",
+    "जो डर के आगे जीत जाता है, उसी का नाम इतिहास में होता है।",
+    "Rupesh, तुम्हारी मेहनत एक दिन ज़रूर रंग लाएगी।",
+    "अपना सर्वश्रेष्ठ दो — बाकी माँ सरस्वती पर छोड़ दो।",
+    "जिज्ञासा ही ज्ञान की माँ है — हमेशा सवाल पूछते रहो।",
+    "समय के साथ चलो नहीं, समय को अपने साथ चलाओ।",
+    "एक मज़बूत नींव पर ही ऊँची इमारत खड़ी होती है।",
+    "पढ़ाई में दर्द है, पर उसका फल अमृत है।",
+    "तुम्हारी कलम में वो ताकत है जो दुनिया बदल सकती है।",
+    "आज का धैर्य कल की सफलता की आधारशिला है।",
+    "जो सूरज से पहले उठे और तारों के साथ सोए — वही विजेता बने।",
+    "हर मुश्किल के पार एक नई रोशनी है।",
+    "ज्ञान की कोई सीमा नहीं — बस सीखते रहो।",
+    "माँ के सपनों को पंख देना ही सच्चा प्यार है।",
+    "Bihar Board 2027 तुम्हारा इंतज़ार कर रहा है — तैयार रहो।",
+    "जो रुकते नहीं, वो थकते नहीं — बस आगे बढ़ते जाते हैं।",
+    "अपनी क्षमता पर संदेह मत करो — तुम सोच से कहीं ज़्यादा मज़बूत हो।",
+  ];
+
+  (function initPopup() {
+    const STORAGE_KEY_ORDER = 'welcomePopupOrder';
+    const STORAGE_KEY_INDEX = 'welcomePopupIndex';
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function getNextQuote() {
+      let order = JSON.parse(localStorage.getItem(STORAGE_KEY_ORDER) || 'null');
+      let idx   = parseInt(localStorage.getItem(STORAGE_KEY_INDEX) || '0', 10);
+      if (!order || idx >= order.length) {
+        order = shuffle(QUOTES_INDICES());
+        idx   = 0;
+        localStorage.setItem(STORAGE_KEY_ORDER, JSON.stringify(order));
+      }
+      const quote = POPUP_QUOTES[order[idx]];
+      localStorage.setItem(STORAGE_KEY_INDEX, idx + 1);
+      return quote;
+    }
+
+    function QUOTES_INDICES() {
+      return POPUP_QUOTES.map((_, i) => i);
+    }
+
+    const quote = getNextQuote();
+    document.getElementById('popupQuoteText').textContent = quote;
+
+    const overlay = document.getElementById('welcomePopup');
+    overlay.style.display = 'flex';
+
+    document.getElementById('popupReadyBtn').addEventListener('click', () => {
+      overlay.classList.add('hiding');
+      setTimeout(() => { overlay.style.display = 'none'; }, 350);
+    });
+  })();
 </script>
 </body>
 </html>
