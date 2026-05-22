@@ -491,15 +491,18 @@
       transition: width 0.3s ease;
     }
 
-    /* ── Timer FAB ─────────────────────────── */
-    .timer-fab {
+    /* ── Right FAB Sidebar ──────────────────── */
+    .right-fabs {
       position: fixed;
       right: 20px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .timer-fab a {
+    .fab-btn {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -509,16 +512,22 @@
       padding: 16px 12px;
       text-decoration: none;
       color: var(--strong-text);
-      transition: opacity 0.15s;
+      transition: opacity 0.15s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+      font-family: 'Inter', sans-serif;
     }
-    .timer-fab a:hover { opacity: 0.85; }
-    .timer-fab .fab-icon { font-size: 1.4rem; }
-    .timer-fab .fab-label {
+    .fab-btn:hover { opacity: 0.85; transform: scale(1.04); }
+    .fab-btn.todo-fab { background: var(--accent); }
+    .fab-icon { font-size: 1.4rem; }
+    .fab-label {
       font-size: 0.58rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       font-weight: 800;
     }
+    /* keep old .timer-fab selector as alias for any references */
+    .timer-fab { display: contents; }
 
     /* ── Footer ────────────────────────────── */
     .footer {
@@ -532,7 +541,7 @@
     .goals { display: none; }
 
     @media (max-width: 900px) {
-      .timer-fab { top: auto; bottom: 20px; transform: none; }
+      .right-fabs { top: auto; bottom: 80px; transform: none; }
     }
     @media (max-width: 480px) {
       .unit { min-width: 76px; padding: 14px 8px 10px; }
@@ -781,10 +790,14 @@
   <span id="themeLabel">Dark</span>
 </button>
 
-<div class="timer-fab">
-  <a href="/timer.html">
+<div class="right-fabs">
+  <a class="fab-btn" href="/timer.html">
     <span class="fab-icon">⏱</span>
     <span class="fab-label">Timer</span>
+  </a>
+  <a class="fab-btn todo-fab" href="/todo.html">
+    <span class="fab-icon">✅</span>
+    <span class="fab-label">Tasks</span>
   </a>
 </div>
 
